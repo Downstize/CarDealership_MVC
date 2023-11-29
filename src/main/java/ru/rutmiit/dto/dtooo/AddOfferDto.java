@@ -22,7 +22,8 @@ public class AddOfferDto {
     private LocalDate created;
     private String seller;
 
-    @NotNull(message = "Please choose a model!")
+    @NotEmpty(message = "Name of model cannot be null or empty!")
+    @Size(min = 2, message = "Name of model should be at least 2 characters long!")
     public String getModel() {
         return model;
     }
@@ -31,7 +32,8 @@ public class AddOfferDto {
         this.model = model;
     }
 
-    @NotNull(message = "Please choose a user!")
+    @NotEmpty(message = "User name cannot be null or empty!")
+    @Size(min = 2, message = "User name should be at least 2 characters long!")
     public String getUsers() {
         return user;
     }

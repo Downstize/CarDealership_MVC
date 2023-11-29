@@ -17,7 +17,7 @@ public class AddUserDto {
     private LocalDate created;
 
 
-    @NotNull(message = "Please choose a role!")
+    @NotNull(message = "UserRole cannot be null or empty!")
     public String getRole() {
         return role;
     }

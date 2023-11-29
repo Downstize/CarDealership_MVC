@@ -22,7 +22,8 @@ public class AddModelDto {
     private LocalDate created;
 
 
-    @NotNull(message = "Please choose a brand!")
+    @NotEmpty(message = "Name of brand cannot be null or empty!")
+    @Size(min = 2, message = "Name of brand should be at least 2 characters long!")
     public String getBrand() {
         return brand;
     }

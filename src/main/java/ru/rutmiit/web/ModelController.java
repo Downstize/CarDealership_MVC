@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.rutmiit.dto.dtooo.AddModelDto;
+import ru.rutmiit.services.serv.BrandService;
 import ru.rutmiit.services.serv.ModelService;
 
 @Controller
@@ -16,12 +17,19 @@ public class ModelController {
 
     @Autowired
     private final ModelService modelService;
-    public ModelController(ModelService modelService) {
+
+    @Autowired
+    private final BrandService brandService;
+    public ModelController(ModelService modelService, BrandService brandService) {
         this.modelService = modelService;
+        this.brandService = brandService;
     }
 
     @GetMapping("/add")
-    public String addModel() {return "model-add";}
+    public String addModel(Model model) {
+        model.addAttribute("availableBrands", brandService.getAll());
+
+        return "model-add";}
 
     @ModelAttribute("modelModel")
     public AddModelDto initModel() {return new AddModelDto();}

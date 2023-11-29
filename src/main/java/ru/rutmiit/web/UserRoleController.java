@@ -2,15 +2,16 @@ package ru.rutmiit.web;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.rutmiit.dto.dtooo.AddUserRoleDto;
-import ru.rutmiit.models.Enum.RoleEnum;
-import ru.rutmiit.services.serv.UserRoleService;
+import ru.rutmiit.dto.AddUserRoleDto;
+import ru.rutmiit.services.UserRoleService;
 
-@RestController
+@Controller
+@RequestMapping("/usersRole")
 public class UserRoleController {
 
     @Autowired
@@ -42,7 +43,7 @@ public class UserRoleController {
     public String showAllUserRoles(Model model) {
         model.addAttribute("userRoleInfos", userRoleService.getAll());
 
-        return "userRole-all";
+        return "user-role-add";
     }
 
 //    @GetMapping("/userRole-delete/{user-role}")

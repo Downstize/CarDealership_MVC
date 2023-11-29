@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.rutmiit.dto.dtooo.AddUserDto;
-import ru.rutmiit.services.serv.UserService;
+import ru.rutmiit.dto.AddUserDto;
+import ru.rutmiit.services.UserRoleService;
+import ru.rutmiit.services.UserService;
 
 @Controller
 @RequestMapping("/users")
@@ -17,12 +18,17 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
-    public UserController(UserService userService) {
+    @Autowired
+    private final UserRoleService userRoleService;
+    public UserController(UserService userService, UserRoleService userRoleService) {
         this.userService = userService;
+        this.userRoleService = userRoleService;
     }
 
     @GetMapping("/add")
-    public String addUser() {return "user-add";}
+    public String addUser(Model model) {
+        model.addAttribute("availableRoles", userRoleService.getAll());
+        return "user-add";}
 
     @ModelAttribute("userModel")
     public AddUserDto initUser() {return new AddUserDto();}
@@ -33,7 +39,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
-            return "redirect:/user/add";
+            return "redirect:/users/add";
         }
         userService.register(userModel);
 

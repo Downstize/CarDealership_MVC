@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.rutmiit.dto.dtooo.AddBrandDto;
-import ru.rutmiit.services.serv.BrandService;
+import ru.rutmiit.dto.AddBrandDto;
+import ru.rutmiit.services.BrandService;
 
 @Controller
 @RequestMapping("/brands")
@@ -53,11 +53,12 @@ public class BrandController {
         return "brand-details";
     }
 
+
     @GetMapping("/brand-delete/{brand-name}")
     public String deleteBrand(@PathVariable("brand-name") String brandName) {
         brandService.removeBrand(brandName);
 
-        return "redirect:/companies/all";
+        return "redirect:/brands/all";
     }
 
 }

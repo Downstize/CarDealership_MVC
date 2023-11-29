@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.rutmiit.dto.dtooo.AddOfferDto;
-import ru.rutmiit.services.serv.OfferService;
+import ru.rutmiit.dto.AddOfferDto;
+import ru.rutmiit.services.ModelService;
+import ru.rutmiit.services.OfferService;
+import ru.rutmiit.services.UserService;
 
 @Controller
 @RequestMapping("/offers")
@@ -17,12 +19,21 @@ public class OfferController {
 
     @Autowired
     private final OfferService offerService;
-    public OfferController(OfferService offerService) {
+    @Autowired
+    private final ModelService modelService;
+    @Autowired
+    private final UserService userService;
+    public OfferController(OfferService offerService, ModelService modelService, UserService userService) {
         this.offerService = offerService;
+        this.modelService = modelService;
+        this.userService = userService;
     }
 
     @GetMapping("/add")
-    public String addOffer() {return "offer-add";}
+    public String addOffer(Model model) {
+        model.addAttribute("availableModels", modelService.getAll());
+        model.addAttribute("availableUsers", userService.getAll());
+        return "offer-add";}
 
     @ModelAttribute("offerModel")
     public AddOfferDto initModel() {return new AddOfferDto();}
@@ -33,7 +44,7 @@ public class OfferController {
         if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("offerModel", offerModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerModel", bindingResult);
-            return "redirect:/offer/add";
+            return "redirect:/offers/add";
         }
         offerService.register(offerModel);
 

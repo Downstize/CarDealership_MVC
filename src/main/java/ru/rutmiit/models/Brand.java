@@ -2,7 +2,6 @@ package ru.rutmiit.models;
 
 import jakarta.persistence.*;
 import ru.rutmiit.models.BaseEntity.BaseEntity;
-import ru.rutmiit.models.entities.Employee;
 
 import java.util.HashSet;
 import java.util.Set;

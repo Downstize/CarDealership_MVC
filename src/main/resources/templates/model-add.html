@@ -9,7 +9,7 @@
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
                 <div class="justify-content-center">
-                    <h1>Add Employee</h1>
+                    <h1>Add Model</h1>
                 </div>
                 <form th:action="@{/models/model/create}"
                       th:method="post"
@@ -17,12 +17,8 @@
                       class="m-md-auto w-50 pb-3">
                     <div class="mb-3">
                         <label class="form-label" for="brand"><h5>All available brands</h5></label>
-                        <select multiple="false" class="form-control text-center"
-                                id="brand" name="name" th:field="*{brand}">
-                            <option th:each="b : ${availableBrands}"
-                                    th:value="${b.name}"
-                                    th:text="${b.name}">Brand name
-                            </option>
+                        <select class="form-control text-center" id="brand" name="brand" th:field="*{brand}">
+                            <option th:each="b : ${availableBrands}" th:value="${b.name}" th:text="${b.name}">Brand name</option>
                         </select>
                         <small th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"
                                class="text-danger">Error
@@ -100,7 +96,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="endYear">End Year</label>
                         <input th:field="*{endYear}"
-                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               th:errorclass="is-invalid" type="text" class="form-control text-center"
                                id="endYear" aria-describedby="endYear" name="endYear"/>
                         <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}" class="text-danger">Error
                             message</small>
@@ -114,7 +110,7 @@
                         <small th:if="${#fields.hasErrors('created')}" th:errors="*{created}" class="text-danger">Error message</small>
                     </div>
 
-                    <button type="submit" class="btn btn-secondary">Add Employee</button>
+                    <button type="submit" class="btn btn-secondary">Add Model</button>
                 </form>
             </div>
         </div>

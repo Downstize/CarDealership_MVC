@@ -1,43 +1,39 @@
-package ru.rutmiit.models;
+package ru.rutmiit.dto;
 
-
-import jakarta.persistence.*;
-import ru.rutmiit.models.BaseEntity.BaseEntity;
 import ru.rutmiit.models.Enum.EngineEnum;
 import ru.rutmiit.models.Enum.TransmissionEnum;
 
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
-@Entity
-@Table(name = "offer")
-public class Offer extends BaseEntity {
-
-    private Model model;
-    private User user;
+public class ShowDetailedOfferInfoDto {
+    private String model;
+    private String user;
     private String description;
     private EngineEnum engineEnum;
-    private String imageURL;
+    private String imageUrl;
     private int mileage;
     private Double price;
     private TransmissionEnum transmissionEnum;
     private int year;
+    private LocalDate created;
     private String seller;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    public Model getModel() {
+    public String getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    public User getUser(){return user;}
+    public String getUsers() {
+        return user;
+    }
 
-    public void setUser(User user){ this.user = user;}
+    public void setUsers(String user) {
+        this.user = user;
+    }
 
-    @Column(name = "description", nullable = false ,columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -46,8 +42,6 @@ public class Offer extends BaseEntity {
         this.description = description;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "engine", nullable = false)
     public EngineEnum getEngineEnum() {
         return engineEnum;
     }
@@ -56,16 +50,14 @@ public class Offer extends BaseEntity {
         this.engineEnum = engineEnum;
     }
 
-    @Column(name = "imagine_url", nullable = false, columnDefinition = "TEXT")
     public String getImageUrl() {
-        return imageURL;
+        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageURL = imageUrl;
+        this.imageUrl = imageUrl;
     }
 
-    @Column(name = "mileage", nullable = false, columnDefinition = "INT")
     public int getMileage() {
         return mileage;
     }
@@ -74,7 +66,6 @@ public class Offer extends BaseEntity {
         this.mileage = mileage;
     }
 
-    @Column(name = "price", nullable = false, columnDefinition = "DECIMAL(19,2)")
     public Double getPrice() {
         return price;
     }
@@ -83,8 +74,6 @@ public class Offer extends BaseEntity {
         this.price = price;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "transmission", nullable = false)
     public TransmissionEnum getTransmissionEnum() {
         return transmissionEnum;
     }
@@ -93,7 +82,6 @@ public class Offer extends BaseEntity {
         this.transmissionEnum = transmissionEnum;
     }
 
-    @Column(name = "year", nullable = false, columnDefinition = "INT")
     public int getYear() {
         return year;
     }
@@ -102,7 +90,14 @@ public class Offer extends BaseEntity {
         this.year = year;
     }
 
-    @Column(name = "seller", nullable = false)
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
     public String getSeller() {
         return seller;
     }
@@ -110,4 +105,5 @@ public class Offer extends BaseEntity {
     public void setSeller(String seller) {
         this.seller = seller;
     }
+
 }

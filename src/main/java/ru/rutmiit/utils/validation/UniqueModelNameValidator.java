@@ -1,10 +1,8 @@
 package ru.rutmiit.utils.validation;
 
-import ru.rutmiit.repositories.CompanyRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import ru.rutmiit.repositories.repo.BrandRepository;
-import ru.rutmiit.repositories.repo.ModelRepository;
+import ru.rutmiit.repositories.ModelRepository;
 
 public class UniqueModelNameValidator implements ConstraintValidator<UniqueModelName, String> {
     private final ModelRepository modelRepository;

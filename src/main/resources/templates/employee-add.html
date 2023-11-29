@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<div class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Add Employee</h1>
+                </div>
+                <form th:action="@{/employees/add}"
+                      th:method="post"
+                      th:object="${employeeModel}"
+                      class="m-md-auto w-50 pb-3">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input th:field="*{firstName}"
+                               th:errorclass="is-invalid"
+                               type="text" class="form-control text-center"
+                               id="firstName" aria-describedby="firstName" name="firstName"/>
+                        <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input th:field="*{lastName}"
+                               th:errorclass="is-invalid"
+                               type="text" class="form-control text-center"
+                               id="lastName" aria-describedby="lastName" name="lastName"/>
+                        <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">Error
+                            message</small>
+                    </div>
+                    <fieldset class="mb-3">
+                        <legend>Choose Education Level</legend>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input th:field="*{educationLevel}"
+                                       th:value="Master"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input" name="educationLevel"/>
+                                <span>Master</span>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input th:field="*{educationLevel}"
+                                       th:value="Bachelor"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input" name="educationLevel"/>
+                                <span>Bachelor</span>
+                            </label>
+                        </div>
+                        <div class="form-check disabled">
+                            <label class="form-check-label">
+                                <input th:field="*{educationLevel}"
+                                       th:value="Secondary"
+                                       th:errorclass="is-invalid"
+                                       type="radio" class="form-check-input " name="educationLevel"/>
+                                <span>Secondary</span>
+                            </label>
+                        </div>
+                        <small th:if="${#fields.hasErrors('educationLevel')}" th:errors="*{educationLevel}"
+                               class="text-danger">Error message</small>
+                    </fieldset>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="company"><h5>All available companies</h5></label>
+                        <select multiple="false" class="form-control text-center"
+                                id="company" name="name" th:field="*{companyName}">
+                            <option th:each="c : ${availableCompanies}"
+                                    th:value="${c.name}"
+                                    th:text="${c.name}">Company name
+                            </option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"
+                               class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="jobTitle">Job Title</label>
+                        <input th:field="*{jobTitle}"
+                               th:errorclass="is-invalid" type="text" class="form-control text-center"
+                               id="jobTitle" aria-describedby="jobTitle" name="jobTitle"/>
+                        <small th:if="${#fields.hasErrors('jobTitle')}" th:errors="*{jobTitle}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="birthDate">Birth Date</label>
+                        <input th:field="*{birthDate}"
+                               th:errorclass="is-invalid" type="date" class="form-control text-center"
+                               id="birthDate" aria-describedby="birthDate" name="birthDate"/>
+                        <small th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="salary">Salary</label>
+                        <input th:field="*{salary}"
+                               th:errorclass="is-invalid" type="number" min="0"
+                               class="form-control text-center" id="salary"
+                               aria-describedby="salary" name="salary"/>
+                        <small th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" class="text-danger">Error
+                            message</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Add Employee</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer th:replace="fragments/footer"/>
+</html>

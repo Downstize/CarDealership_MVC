@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 
-public class AddUserDto {
+public class ShowDetailedUserInfoDto {
     private String role;
     private String userName;
     private String password;
@@ -17,7 +17,6 @@ public class AddUserDto {
     private LocalDate created;
 
 
-    @NotNull(message = "Please choose a role!")
     public String getRole() {
         return role;
     }
@@ -26,8 +25,6 @@ public class AddUserDto {
         this.role = role;
     }
 
-    @NotEmpty(message = "Model name cannot be null or empty!")
-    @Size(min = 2, message = "Model name should be at least 2 characters long!")
     public String getUserName() {
         return userName;
     }
@@ -36,8 +33,6 @@ public class AddUserDto {
         this.userName = userName;
     }
 
-    @NotEmpty(message = "Password name cannot be null or empty!")
-    @Size(min = 2, message = "Password must be minimum two characters!")
     public String getPassword() {
         return password;
     }
@@ -46,8 +41,6 @@ public class AddUserDto {
         this.password = password;
     }
 
-    @NotEmpty(message = "First name cannot be null or empty!")
-    @Size(min = 2, message = "First name should be at least 2 characters long!")
     public String getFirstName() {
         return firstName;
     }
@@ -56,8 +49,6 @@ public class AddUserDto {
         this.firstName = firstName;
     }
 
-    @NotEmpty(message = "Last name cannot be null or empty!")
-    @Size(min = 2, message = "Last name should be at least 2 characters long!")
     public String getLastName() {
         return lastName;
     }
@@ -66,8 +57,6 @@ public class AddUserDto {
         this.lastName = lastName;
     }
 
-    @NotEmpty(message = "Last name cannot be null or empty!")
-    @Size(min = 10, message = "Image URL must be minimum two characters!")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -76,7 +65,6 @@ public class AddUserDto {
         this.imageUrl = imageUrl;
     }
 
-    @NotNull(message = "Date of model create cannot be null or empty!")
     public LocalDate getCreated() {
         return created;
     }

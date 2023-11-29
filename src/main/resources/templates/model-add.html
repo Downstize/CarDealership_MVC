@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <div class="justify-content-center">
+                    <h1>Add Model</h1>
+                </div>
+                <form th:action="@{/models/add}"
+                      th:method="post"
+                      th:object="${modelModel}"
+                      class="m-md-auto w-50 pb-3">
+                    <div class="mb-3">
+                        <label class="form-label" for="brand"><h5>All available brands</h5></label>
+                        <select multiple="false" class="form-control text-center"
+                                id="brand" name="name" th:field="*{brand}">
+                            <option th:each="b : ${}"
+                                    th:value="${b.name}"
+                                    th:text="${b.name}">Company name
+                            </option>
+                        </select>
+                        <small th:if="${#fields.hasErrors('brandName')}" th:errors="*{brand}"
+                               class="text-danger">Error
+                            message</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input th:field="*{name}" type="text" class="form-control" id="name" name="name">
+                        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text text-danger"></small>
+                    </div>
+
+                    <!-- Add more input fields as per your model fields -->
+                    <!-- Example for a description field -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea th:field="*{description}" class="form-control" id="description" name="description"></textarea>
+                        <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="form-text text-danger"></small>
+                    </div>
+
+                    <!-- ... other fields ... -->
+
+                    <button type="submit" class="btn btn-secondary">Add Model</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Replace with your footer -->
+<footer th:replace="fragments/footer"></footer>
+</body>
+</html>

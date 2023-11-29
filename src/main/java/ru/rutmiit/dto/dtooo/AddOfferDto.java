@@ -1,78 +1,47 @@
 package ru.rutmiit.dto.dtooo;
 
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import ru.rutmiit.models.Enum.EngineEnum;
 import ru.rutmiit.models.Enum.TransmissionEnum;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AddOfferDto {
-    private String id;
-    private AddModelDto model;
-    private AddUserDto user;
+    private String model;
+    private String user;
     private String description;
     private EngineEnum engineEnum;
     private String imageUrl;
     private int mileage;
-    private BigDecimal price;
+    private Double price;
     private TransmissionEnum transmissionEnum;
     private int year;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private LocalDate created;
     private String seller;
 
-    protected AddOfferDto() {};
-
-    public AddOfferDto(String id, AddModelDto model, AddUserDto user, String description, EngineEnum engineEnum, String imageUrl,
-                       int mileage, BigDecimal price, TransmissionEnum transmissionEnum, int year, LocalDateTime created,
-                       LocalDateTime modified, String seller) {
-        this.id = id;
-        this.model = model;
-        this.user = user;
-        this.description = description;
-        this.engineEnum = engineEnum;
-        this.imageUrl = imageUrl;
-        this.mileage = mileage;
-        this.price = price;
-        this.transmissionEnum = transmissionEnum;
-        this.year = year;
-        this.created = created;
-        this.modified = modified;
-        this.seller = seller;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public AddModelDto getModel() {
+    @NotNull(message = "Please choose a model!")
+    public String getModel() {
         return model;
     }
 
-    public void setModel(AddModelDto model) {
+    public void setModel(String model) {
         this.model = model;
     }
 
-    public AddUserDto getUsers() {
+    @NotNull(message = "Please choose a user!")
+    public String getUsers() {
         return user;
     }
 
-    public void setUsers(AddUserDto user) {
+    public void setUsers(String user) {
         this.user = user;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 7, message = "Year must be minimum seven characters!")
+    @NotEmpty(message = "Description must not be null or empty!")
+    @Size(min = 10, message = "Description must be at least 10 characters!")
     public String getDescription() {
         return description;
     }
@@ -81,6 +50,7 @@ public class AddOfferDto {
         this.description = description;
     }
 
+    @NotNull(message = "Please choose an engine type!")
     public EngineEnum getEngineEnum() {
         return engineEnum;
     }
@@ -89,9 +59,8 @@ public class AddOfferDto {
         this.engineEnum = engineEnum;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 10, message = "Image URL must be minimum two characters!")
+    @NotEmpty(message = "Last name cannot be null or empty!")
+    @Size(min = 10, message = "Image URL must be minimum two characters!")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -100,6 +69,8 @@ public class AddOfferDto {
         this.imageUrl = imageUrl;
     }
 
+    @NotNull(message = "Mileage cannot be null or empty!")
+    @Min(value = 1, message = "Mileage must be a positive number!")
     public int getMileage() {
         return mileage;
     }
@@ -108,15 +79,17 @@ public class AddOfferDto {
         this.mileage = mileage;
     }
 
-    @DecimalMin(value = "100")
-    public BigDecimal getPrice() {
+    @NotNull(message = "Price cannot be null or empty!")
+    @Min(value = 1, message = "Price must be a positive number!")
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
+    @NotNull(message = "Please choose a transmission!")
     public TransmissionEnum getTransmissionEnum() {
         return transmissionEnum;
     }
@@ -125,6 +98,8 @@ public class AddOfferDto {
         this.transmissionEnum = transmissionEnum;
     }
 
+    @NotNull(message = "Year cannot be null or empty!")
+    @Min(value = 1, message = "Year must be a positive number!")
     public int getYear() {
         return year;
     }
@@ -133,24 +108,17 @@ public class AddOfferDto {
         this.year = year;
     }
 
-    public LocalDateTime getCreated() {
+    @NotNull(message = "Date of model create cannot be null or empty!")
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
-
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Seller name must not be null or empty!")
+    @Size(min = 3, message = "Seller name must be at least 3 characters!")
     public String getSeller() {
         return seller;
     }

@@ -5,28 +5,30 @@ import jakarta.persistence.*;
 import ru.rutmiit.models.BaseEntity.BaseEntityUUID;
 import ru.rutmiit.models.Enum.RoleEnum;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_role")
 public class UserRole extends BaseEntityUUID {
 
-    private List<User> users;
+    private Set<User> users;
     private RoleEnum roleEnum;
 
-    protected UserRole() {
+    public UserRole() {
+        users = new HashSet<>();
     }
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     public RoleEnum getRoleEnum() {
         return roleEnum;

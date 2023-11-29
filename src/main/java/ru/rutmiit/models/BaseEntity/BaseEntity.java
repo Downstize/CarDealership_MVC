@@ -6,16 +6,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @MappedSuperclass
 public abstract class BaseEntity {
 
     protected String id;
 
-    protected LocalDateTime created;
+    protected LocalDate created;
 
-    protected LocalDateTime modified;
+    protected LocalDate modified;
 
     @Id
     @GeneratedValue(generator = "uuid-string")
@@ -30,20 +30,20 @@ public abstract class BaseEntity {
     }
 
     @Column(name = "created")
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
     @Column(name = "modified")
-    public LocalDateTime getModified() {
+    public LocalDate getModified() {
         return modified;
     }
 
-    public void setModified(LocalDateTime modified) {
+    public void setModified(LocalDate modified) {
         this.modified = modified;
     }
 }

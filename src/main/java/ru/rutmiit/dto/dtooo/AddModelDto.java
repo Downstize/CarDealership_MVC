@@ -1,58 +1,38 @@
 package ru.rutmiit.dto.dtooo;
 
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import ru.rutmiit.models.Enum.CategoryEnum;
+import ru.rutmiit.utils.validation.UniqueModelName;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AddModelDto {
-    private String id;
-    private AddBrandDto brand;
+    @UniqueModelName
+    private String brand;
     private String name;
     private CategoryEnum categoryEnum;
     private String imageURL;
     private int startYear;
     private int endYear;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private LocalDate created;
 
-    protected AddModelDto() {};
 
-    public AddModelDto(String id, AddBrandDto brand, String name, CategoryEnum categoryEnum, String imageURL, int startYear,
-                       int endYear, LocalDateTime created, LocalDateTime modified) {
-        this.id = id;
-        this.brand = brand;
-        this.name = name;
-        this.categoryEnum = categoryEnum;
-        this.imageURL = imageURL;
-        this.startYear = startYear;
-        this.endYear = endYear;
-        this.created = created;
-        this.modified = modified;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public AddBrandDto getBrand() {
+    @NotNull(message = "Please choose a brand!")
+    public String getBrand() {
         return brand;
     }
 
-    public void setBrand(AddBrandDto brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 2, message = "Name must be minimum two characters!")
+    @NotEmpty(message = "Model name cannot be null or empty!")
+    @Size(min = 2, message = "Model name should be at least 2 characters long!")
     public String getName() {
         return name;
     }
@@ -61,6 +41,7 @@ public class AddModelDto {
         this.name = name;
     }
 
+    @NotNull(message = "Please choose a category!")
     public CategoryEnum getCategoryEnum() {
         return categoryEnum;
     }
@@ -69,9 +50,8 @@ public class AddModelDto {
         this.categoryEnum = categoryEnum;
     }
 
-    @NotNull
-    @NotEmpty
-    @Length(min = 10, message = "Image URL must be minimum two characters!")
+    @NotEmpty(message = "Last name cannot be null or empty!")
+    @Size(min = 10, message = "Image URL must be minimum two characters!")
     public String getImageURL() {
         return imageURL;
     }
@@ -80,6 +60,8 @@ public class AddModelDto {
         this.imageURL = imageURL;
     }
 
+    @NotNull(message = "Start year cannot be null or empty!")
+    @Min(value = 1, message = "Start year must be real!")
     public int getStartYear() {
         return startYear;
     }
@@ -88,6 +70,8 @@ public class AddModelDto {
         this.startYear = startYear;
     }
 
+    @NotNull(message = "End year cannot be null or empty!")
+    @Min(value = 1, message = "End year must be real!")
     public int getEndYear() {
         return endYear;
     }
@@ -96,20 +80,14 @@ public class AddModelDto {
         this.endYear = endYear;
     }
 
-    public LocalDateTime getCreated() {
+    @NotNull(message = "Date of model create cannot be null or empty!")
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
 
 }

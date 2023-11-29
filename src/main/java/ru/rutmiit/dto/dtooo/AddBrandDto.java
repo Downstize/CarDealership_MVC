@@ -2,36 +2,18 @@ package ru.rutmiit.dto.dtooo;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.Size;
+import ru.rutmiit.utils.validation.UniqueBrandName;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AddBrandDto {
-    private String id;
+    @UniqueBrandName
     private String name;
-    private LocalDateTime created;
-    private LocalDateTime modified;
+    private LocalDate created;
 
-    public AddBrandDto(String id, String name, LocalDateTime created, LocalDateTime modified) {
-        this.id = id;
-        this.name = name;
-        this.created = created;
-        this.modified = modified;
-    }
-
-    protected AddBrandDto() {};
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @NotNull
-    @NotEmpty
-    @Length(min = 2, message = "Name must be minimum two characters!")
+    @NotEmpty(message = "Brand name cannot be null or empty!")
+    @Size(min = 2, message = "Brand name should be at least 2 characters long!")
     public String getName() {
         return name;
     }
@@ -40,19 +22,13 @@ public class AddBrandDto {
         this.name = name;
     }
 
-    public LocalDateTime getCreated() {
+    @NotNull(message = "Date of brand create cannot be null or empty!")
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
-    public LocalDateTime getModified() {
-        return modified;
-    }
-
-    public void setModified(LocalDateTime modified) {
-        this.modified = modified;
-    }
 }

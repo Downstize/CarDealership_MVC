@@ -35,7 +35,7 @@ public class UserRoleService {
 
 
     public void removeUserRole(RoleEnum roleEnum) {
-        userRoleRepository.deleteByRole(roleEnum);
+        userRoleRepository.deleteByRoleEnum(roleEnum);
     }
 
 }

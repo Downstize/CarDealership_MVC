@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.rutmiit.dto.AddUserRoleDto;
+import ru.rutmiit.models.Enum.RoleEnum;
 import ru.rutmiit.services.UserRoleService;
 
 @Controller
@@ -43,13 +44,13 @@ public class UserRoleController {
     public String showAllUserRoles(Model model) {
         model.addAttribute("userRoleInfos", userRoleService.getAll());
 
-        return "user-role-add";
+        return "user-role-all";
     }
 
-//    @GetMapping("/userRole-delete/{user-role}")
-//    public String deleteUserRole(@PathVariable("user-role") RoleEnum roleEnum) {
-//        userRoleService.removeUserRole(roleEnum);
-//
-//        return "redirect:/useRole/all";
-//    }
+    @GetMapping("/userRole-delete/{user-role}")
+    public String deleteUserRole(@PathVariable("user-role") RoleEnum roleEnum) {
+        userRoleService.removeUserRole(roleEnum);
+
+        return "redirect:/";
+    }
 }

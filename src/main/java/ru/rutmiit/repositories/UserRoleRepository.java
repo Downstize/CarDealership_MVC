@@ -15,5 +15,5 @@ public interface UserRoleRepository extends JpaRepository<UserRole, String> {
 
     @Modifying
     @Transactional
-    void deleteByRole(RoleEnum roleEnum);
+    void deleteByRoleEnum(RoleEnum roleEnum);
 }

@@ -4,13 +4,13 @@ import jakarta.validation.constraints.NotNull;
 import ru.rutmiit.models.Enum.RoleEnum;
 
 public class ShowUserRoleInfoDto {
-    private String userRole;
+    private String roleEnum;
 
     public String getRoleEnum() {
-        return userRole;
+        return roleEnum;
     }
 
-    public void setRoleEnum(String userRole) {
-        this.userRole = userRole;
+    public void setRoleEnum(String roleEnum) {
+        this.roleEnum = roleEnum;
     }
 }

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 public class ShowOfferInfoDto {
     private String model;
     private String user;
-    private String description;
     private Double price;
     private int year;
     private String seller;
@@ -18,14 +17,6 @@ public class ShowOfferInfoDto {
 
     public void setModel(String model) {
         this.model = model;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Double getPrice() {

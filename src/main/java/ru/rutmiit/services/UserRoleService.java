@@ -4,6 +4,8 @@ package ru.rutmiit.services;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddUserRoleDto;
+import ru.rutmiit.dto.ShowUserRoleInfoDto;
+import ru.rutmiit.models.Enum.RoleEnum;
 import ru.rutmiit.models.UserRole;
 import ru.rutmiit.repositories.UserRoleRepository;
 
@@ -27,13 +29,13 @@ public class UserRoleService {
         userRoleRepository.saveAndFlush(role);
     }
 
-    public List<AddUserRoleDto> getAll() {
-        return userRoleRepository.findAll().stream().map((s) -> modelMapper.map(s, AddUserRoleDto.class)).collect(Collectors.toList());
+    public List<ShowUserRoleInfoDto> getAll() {
+        return userRoleRepository.findAll().stream().map((userRole) -> modelMapper.map(userRole, ShowUserRoleInfoDto.class)).collect(Collectors.toList());
     }
 
 
-//    public void removeUserRole(RoleEnum roleEnum) {
-//        userRoleRepository.deleteByUserRole(roleEnum);
-//    }
+    public void removeUserRole(RoleEnum roleEnum) {
+        userRoleRepository.deleteByRole(roleEnum);
+    }
 
 }

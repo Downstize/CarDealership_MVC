@@ -37,4 +37,8 @@ public class UserRole extends BaseEntityUUID {
     public void setRoleEnum(RoleEnum roleEnum) {
         this.roleEnum = roleEnum;
     }
+
+    public String toString() {
+        return roleEnum.toString();
+    }
 }

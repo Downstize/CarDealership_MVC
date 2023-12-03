@@ -6,6 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddUserDto;
 import ru.rutmiit.dto.ShowDetailedUserInfoDto;
+import ru.rutmiit.dto.ShowUserInfoDto;
 import ru.rutmiit.models.User;
 import ru.rutmiit.repositories.UserRepository;
 import ru.rutmiit.repositories.UserRoleRepository;
@@ -35,8 +36,8 @@ public class UserService {
         userRepository.saveAndFlush(u);
     }
 
-    public List<AddUserDto> getAll() {
-        return userRepository.findAll().stream().map((s) -> modelMapper.map(s, AddUserDto.class)).collect(Collectors.toList());
+    public List<ShowUserInfoDto> getAll() {
+        return userRepository.findAll().stream().map((user) -> modelMapper.map(user, ShowUserInfoDto.class)).collect(Collectors.toList());
     }
 
 

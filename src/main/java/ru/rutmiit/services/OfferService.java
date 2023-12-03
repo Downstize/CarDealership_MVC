@@ -40,8 +40,8 @@ public class OfferService {
         offerRepository.saveAndFlush(of);
     }
 
-    public List<AddOfferDto> getAll() {
-        return offerRepository.findAll().stream().map((offer) -> modelMapper.map(offer, AddOfferDto.class)).collect(Collectors.toList());
+    public List<ShowOfferInfoDto> getAll() {
+        return offerRepository.findAll().stream().map((offer) -> modelMapper.map(offer, ShowOfferInfoDto.class)).collect(Collectors.toList());
     }
 
 

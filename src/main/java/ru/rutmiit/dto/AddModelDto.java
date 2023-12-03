@@ -12,8 +12,9 @@ import ru.rutmiit.utils.validation.UniqueModelName;
 import java.time.LocalDate;
 
 public class AddModelDto {
-    @UniqueModelName
+
     private String brand;
+    @UniqueModelName
     private String name;
     private CategoryEnum categoryEnum;
     private String imageURL;

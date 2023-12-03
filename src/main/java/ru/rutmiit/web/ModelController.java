@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.dto.AddModelDto;
 import ru.rutmiit.services.BrandService;
 import ru.rutmiit.services.ModelService;
@@ -42,20 +43,22 @@ public class ModelController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.modelModel", bindingResult);
             return "redirect:/models/add";
         }
-        modelService.register(modelModel);
+        modelService.addModel(modelModel);
 
         return "redirect:/";
     }
 
     @GetMapping("/model/all")
     public String showAllModels(Model model) {
-        model.addAttribute("modelInfos", modelService.getAll());
+        model.addAttribute("modelInfos", modelService.getAllModels());
+        model.addAttribute("brands", brandService.getAll()); // Add this line
 
         return "model-all";
     }
 
+
     @GetMapping("/model-details/{model-name}")
-    public String ModelDetails(@PathVariable("model-name") String modelName, Model model) {
+    public String modelDetails(@PathVariable("model-name") String modelName, Model model) {
         model.addAttribute("modelDetails", modelService.modelDetails(modelName));
 
         return "model-details";

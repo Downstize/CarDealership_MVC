@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddBrandDto;
+import ru.rutmiit.dto.ShowBrandInfoDto;
 import ru.rutmiit.dto.ShowDetailedBrandInfoDto;
 import ru.rutmiit.models.Brand;
 import ru.rutmiit.repositories.BrandRepository;
@@ -25,16 +26,12 @@ public class BrandService {
     }
 
     public void addBrand(AddBrandDto brand) {
-        Brand b = modelMapper.map(brand, Brand.class);
-        if (b.getId() == null || !brandRepository.existsById(b.getId())) {
-            brandRepository.saveAndFlush(b);
-        }
+        brandRepository.saveAndFlush(modelMapper.map(brand, Brand.class));
     }
 
-    public List<AddBrandDto> getAll() {
-        return brandRepository.findAll().stream().map((s) -> modelMapper.map(s, AddBrandDto.class)).collect(Collectors.toList());
+    public List<ShowBrandInfoDto> getAll() {
+        return brandRepository.findAll().stream().map((brand) -> modelMapper.map(brand, ShowBrandInfoDto.class)).collect(Collectors.toList());
     }
-
 
     public AddBrandDto findBrandByName(String brandName) {
         return brandRepository.findByName(brandName)

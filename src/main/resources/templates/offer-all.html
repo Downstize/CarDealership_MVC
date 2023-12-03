@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head"/>
+<body class="d-flex flex-column h-100">
+<div th:replace="fragments/navbar">Navbar</div>
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
+                <h2 class="text-center text-dark mt-5">All Offers</h2>
+                <div th:each="o : ${offerInfos}" class="d-flex flex-column bg-text mb-3">
+                    <h2 th:text="'Model: ' + ${o.model}"></h2>
+                    <h2 th:text="'User: ' + ${o.users}"></h2>
+                    <h2 th:text="'Description: ' + ${o.description}"></h2>
+                    <h2 th:text="'Engine Type: ' + ${o.engineEnum}"></h2>
+                    <h2 th:text="'Image URL: ' + ${o.imageURL}"></h2>
+                    <h2 th:text="'Mileage: ' + ${o.mileage}"></h2>
+                    <h2 th:text="'Price: ' + ${o.price}"></h2>
+                    <h2 th:text="'Transmission type: ' + ${o.transmissionEnum}"></h2>
+                    <h2 th:text="'Year: ' + ${o.year}"></h2>
+                    <h2 th:text="'Seller: ' + ${o.seller}"></h2>
+                    <h2 th:text="'Created: ' + ${o.created}"></h2>
+                    <h4><a class="btn-block" th:href="@{/offers/offer-details/{offer-name}(offer-name=${o.price})}">Detail
+                        info</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer"/>
+</body>
+</html>

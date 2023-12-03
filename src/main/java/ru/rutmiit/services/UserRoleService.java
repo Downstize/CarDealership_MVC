@@ -31,6 +31,7 @@ public class UserRoleService {
         return userRoleRepository.findAll().stream().map((s) -> modelMapper.map(s, AddUserRoleDto.class)).collect(Collectors.toList());
     }
 
+
 //    public void removeUserRole(RoleEnum roleEnum) {
 //        userRoleRepository.deleteByUserRole(roleEnum);
 //    }

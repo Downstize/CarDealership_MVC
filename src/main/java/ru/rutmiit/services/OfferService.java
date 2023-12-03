@@ -29,7 +29,7 @@ public class OfferService {
 
                 Offer b = modelMapper.map(offer, Offer.class);
             if (b.getId() == null || findOffer(b.getId()).isEmpty()) {
-                 modelMapper.map(offerRepository.save(b), AddOfferDto.class);
+                 modelMapper.map(offerRepository.saveAndFlush(b), AddOfferDto.class);
             }
 
     }

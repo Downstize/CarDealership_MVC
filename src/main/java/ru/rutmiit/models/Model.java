@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Table(name = "model")
 public class Model extends BaseEntity {
-
+    @ManyToOne
     private Brand brand;
     private Set<Offer> offers;
     private String name;
@@ -24,7 +24,7 @@ public class Model extends BaseEntity {
     }
 
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToOne
     public Brand getBrand() {
         return brand;
     }

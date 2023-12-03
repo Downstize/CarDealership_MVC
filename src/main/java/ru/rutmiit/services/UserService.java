@@ -4,8 +4,10 @@ import org.modelmapper.ModelMapper;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.dto.AddUserDto;
 import ru.rutmiit.dto.ShowDetailedUserInfoDto;
+import ru.rutmiit.models.Brand;
 import ru.rutmiit.models.User;
 import ru.rutmiit.repositories.UserRepository;
 
@@ -25,13 +27,11 @@ public class UserService {
     }
 
 
-    public void  register(AddUserDto users) {
-
-                User b = modelMapper.map(users, User.class);
-            if (b.getId() == null || findUser(b.getId()).isEmpty()) {
-                 modelMapper.map(userRepository.save(b), AddUserDto.class);
-            }
-
+    public void addUser(AddUserDto user) {
+        User u = modelMapper.map(user, User.class);
+        if (u.getId() == null || !userRepository.existsById(u.getId())) {
+            userRepository.saveAndFlush(u);
+        }
     }
 
 

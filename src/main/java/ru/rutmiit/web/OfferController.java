@@ -31,7 +31,7 @@ public class OfferController {
 
     @GetMapping("/add")
     public String addOffer(Model model) {
-        model.addAttribute("availableModels", modelService.getAll());
+        model.addAttribute("availableModels", modelService.getAllModels());
         model.addAttribute("availableUsers", userService.getAll());
         return "offer-add";}
 

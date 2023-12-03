@@ -41,7 +41,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
             return "redirect:/users/add";
         }
-        userService.register(userModel);
+        userService.addUser(userModel);
 
         return "redirect:/";
     }

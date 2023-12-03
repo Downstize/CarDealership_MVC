@@ -6,7 +6,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddModelDto;
 import ru.rutmiit.dto.ShowDetailedModelInfoDto;
+import ru.rutmiit.dto.ShowModelInfoDto;
 import ru.rutmiit.models.Model;
+import ru.rutmiit.repositories.BrandRepository;
 import ru.rutmiit.repositories.ModelRepository;
 
 import java.util.List;
@@ -19,32 +21,32 @@ public class ModelService {
     private final ModelMapper modelMapper;
     private final ModelRepository modelRepository;
 
-    public ModelService(ModelMapper modelMapper, ModelRepository modelRepository) {
+    private final BrandRepository brandRepository;
+
+    public ModelService(ModelMapper modelMapper, ModelRepository modelRepository, BrandRepository brandRepository) {
         this.modelMapper = modelMapper;
         this.modelRepository = modelRepository;
+        this.brandRepository = brandRepository;
     }
 
 
-    public void register(AddModelDto model) {
-                Model b = modelMapper.map(model, Model.class);
-                if (b.getId() == null || findModel(b.getId()).isEmpty()) {
-                    modelMapper.map(modelRepository.saveAndFlush(b), AddModelDto.class);
-                }
-
+    public void addModel(AddModelDto addModelDto) {
+        Model model = modelMapper.map(addModelDto, Model.class);
+        model.setBrand(brandRepository.findByName(addModelDto.getBrand()).orElse(null));
+        modelRepository.saveAndFlush(model);
     }
 
-
-    public List<AddModelDto> getAll() {
-        return modelRepository.findAll().stream().map((s) -> modelMapper.map(s, AddModelDto.class)).collect(Collectors.toList());
+    public List<ShowModelInfoDto> getAllModels() {
+        return modelRepository.findAll().stream().map(model -> modelMapper.map(model, ShowModelInfoDto.class))
+                .collect(Collectors.toList());
     }
-
 
     public Optional<AddModelDto> findModel(String id) {
         return Optional.ofNullable(modelMapper.map(modelRepository.findById(id), AddModelDto.class));
     }
 
     public ShowDetailedModelInfoDto modelDetails(String modelName) {
-        return modelMapper.map(modelRepository.findByName(modelName).orElse(null), ShowDetailedModelInfoDto.class);
+        return modelMapper.map(modelRepository.findByName(modelName), ShowDetailedModelInfoDto.class);
     }
 
     public void removeModel(String modelName) {

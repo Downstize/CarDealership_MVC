@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "brand")
+@Table(name = "brands")
 public class Brand extends BaseEntity {
 
     private Set<Model> models;
@@ -34,6 +34,10 @@ public class Brand extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String toString() {
+        return name;
     }
 
 }

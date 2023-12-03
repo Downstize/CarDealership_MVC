@@ -1,9 +1,6 @@
 package ru.rutmiit.models.BaseEntity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
@@ -18,9 +15,7 @@ public abstract class BaseEntity {
     protected LocalDate modified;
 
     @Id
-    @GeneratedValue(generator = "uuid-string")
-    @GenericGenerator(name = "uuid-string",
-            strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     public String getId() {
         return id;

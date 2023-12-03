@@ -66,7 +66,7 @@ public class OfferController {
     }
 
     @GetMapping("/offer-delete/{offer-name}")
-    public String deleteBrand(@PathVariable("brand-name") Double offerPrice) {
+    public String deleteOffer(@PathVariable("offer-name") Double offerPrice) {
         offerService.removeOffer(offerPrice);
 
         return "redirect:/offer/all";

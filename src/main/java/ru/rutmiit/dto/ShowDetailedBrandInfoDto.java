@@ -1,11 +1,15 @@
 package ru.rutmiit.dto;
 
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class ShowDetailedBrandInfoDto {
     private String name;
     private LocalDate created;
+
+    private LocalDate modified;
 
     public String getName() {
         return name;
@@ -21,5 +25,13 @@ public class ShowDetailedBrandInfoDto {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public LocalDate getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDate modified) {
+        this.modified = modified;
     }
 }

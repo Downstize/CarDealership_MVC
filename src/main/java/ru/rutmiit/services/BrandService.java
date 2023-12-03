@@ -42,7 +42,7 @@ public class BrandService {
 
 
     public ShowDetailedBrandInfoDto brandDetails(String brandName) {
-        return modelMapper.map(brandRepository.findByName(brandName), ShowDetailedBrandInfoDto.class);
+        return modelMapper.map(brandRepository.findByName(brandName).orElse(null), ShowDetailedBrandInfoDto.class);
     }
 
 

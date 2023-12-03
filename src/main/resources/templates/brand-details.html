@@ -15,9 +15,6 @@
           <div class="col-md-6"><img src="/pic/company.png" height="350px"></div>
           <div class="col-md-6 pt-3">
             <h2>Brand</h2>
-            <div th:each="workoutItem : ${workout}">
-              <span th:text="${workoutItem.exName}"></span>
-            </div>
             <h4 th:text="'Name: ' + ${brandDetails.name}"></h4>
             <h4 th:text="'Created: ' + ${brandDetails.created}"></h4>
             <div class="align-bottom"><a class="btn btn-danger align-bottom"

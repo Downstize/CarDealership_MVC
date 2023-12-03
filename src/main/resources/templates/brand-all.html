@@ -11,7 +11,7 @@
         <h2 class="text-center text-dark mt-5">All Brands</h2>
         <div th:each="b : ${brandInfos}" class="d-flex flex-column bg-text mb-3">
           <h2 th:text="'Brand: ' + ${b.name}"></h2>
-          <h4><a class="btn-block" th:href="@{/brands/brand-details/{brands-name}(brand-name=${b.name})}">Detail
+          <h4><a class="btn-block" th:href="@{/brands/brand-details/{brand-name}(brand-name=${b.name})}">Detail
             info</a></h4>
         </div>
       </div>

@@ -11,9 +11,9 @@ import java.util.Optional;
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, String> {
 
-    Optional<Offer> findByYear(int year);
+    Optional<Offer> findById(String id);
 
     @Modifying
     @Transactional
-    void deleteByPrice(Double price);
+    void deleteById(String id);
 }

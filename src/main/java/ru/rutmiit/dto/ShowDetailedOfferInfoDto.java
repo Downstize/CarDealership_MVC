@@ -6,6 +6,8 @@ import ru.rutmiit.models.Enum.TransmissionEnum;
 import java.time.LocalDate;
 
 public class ShowDetailedOfferInfoDto {
+
+    private String id;
     private String model;
     private String user;
     private String description;
@@ -17,6 +19,14 @@ public class ShowDetailedOfferInfoDto {
     private int year;
     private LocalDate created;
     private String seller;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getModel() {
         return model;

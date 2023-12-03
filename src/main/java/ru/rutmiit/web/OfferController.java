@@ -58,17 +58,17 @@ public class OfferController {
         return "offer-all";
     }
 
-    @GetMapping("/offer-details/{offer-name}")
-    public String OfferDetails(@PathVariable("offer-name") int yearOfOffer, Model model) {
-        model.addAttribute("offerDetails", offerService.offerDetails(yearOfOffer));
+    @GetMapping("/offer-details/{offer-id}")
+    public String OfferDetails(@PathVariable("offer-id") String id, Model model) {
+        model.addAttribute("offerDetails", offerService.offerDetails(id));
 
         return "offer-details";
     }
 
-    @GetMapping("/offer-delete/{offer-name}")
-    public String deleteOffer(@PathVariable("offer-name") Double offerPrice) {
-        offerService.removeOffer(offerPrice);
+    @GetMapping("/offer-delete/{offer-id}")
+    public String deleteOffer(@PathVariable("offer-id") String id) {
+        offerService.removeOffer(id);
 
-        return "redirect:/offer/all";
+        return "redirect:/";
     }
 }

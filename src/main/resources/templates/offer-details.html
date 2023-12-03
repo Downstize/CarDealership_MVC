@@ -21,7 +21,7 @@
                     <h2 th:text="'Seller: ' + ${offerDetails.seller}"></h2>
                     <h2 th:text="'Created: ' + ${offerDetails.created}"></h2>
                     <h4><a class="btn btn-danger align-bottom"
-                           th:href="@{/offers/offer-delete/{offer-name}(offer-name=${offerDetails.year})}">Delete
+                           th:href="@{/offers/offer-delete/{offer-name}(offer-name=${offerDetails.id})}">Delete
                         Offer</a></h4>
             </div>
         </div>

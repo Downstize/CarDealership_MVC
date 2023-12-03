@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class AddOfferDto {
+
     private String model;
     private String users;
     private String description;
@@ -21,6 +22,7 @@ public class AddOfferDto {
     private int year;
     private LocalDate created;
     private String seller;
+
 
     @NotEmpty(message = "Name of model cannot be null or empty!")
     @Size(min = 2, message = "Name of model should be at least 2 characters long!")

@@ -12,16 +12,10 @@
                 <div th:each="o : ${offerInfos}" class="d-flex flex-column bg-text mb-3">
                     <h2 th:text="'Model: ' + ${o.model}"></h2>
                     <h2 th:text="'User: ' + ${o.users}"></h2>
-<!--                    <h2 th:text="'Description: ' + ${o.description}"></h2>-->
-<!--                    <h2 th:text="'Engine Type: ' + ${o.engineEnum}"></h2>-->
-<!--                    <h2 th:text="'Image URL: ' + ${o.imageURL}"></h2>-->
-<!--                    <h2 th:text="'Mileage: ' + ${o.mileage}"></h2>-->
                     <h2 th:text="'Price: ' + ${o.price}"></h2>
-<!--                    <h2 th:text="'Transmission type: ' + ${o.transmissionEnum}"></h2>-->
                     <h2 th:text="'Year: ' + ${o.year}"></h2>
                     <h2 th:text="'Seller: ' + ${o.seller}"></h2>
-<!--                    <h2 th:text="'Created: ' + ${o.created}"></h2>-->
-                    <h4><a class="btn-block" th:href="@{/offers/offer-details/{offer-name}(offer-name=${o.year})}">Detail
+                    <h4><a class="btn-block" th:href="@{/offers/offer-details/{offer-name}(offer-name=${o.id})}">Detail
                         info</a></h4>
                 </div>
             </div>

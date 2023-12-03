@@ -4,12 +4,21 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class ShowOfferInfoDto {
+
+    public String id;
     private String model;
     private String user;
     private Double price;
     private int year;
     private String seller;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getModel() {
         return model;

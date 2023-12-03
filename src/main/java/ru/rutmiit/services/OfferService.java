@@ -49,21 +49,21 @@ public class OfferService {
         return Optional.ofNullable(modelMapper.map(offerRepository.findById(id), AddOfferDto.class));
     }
 
-    public ShowDetailedOfferInfoDto offerDetails(int yearOfOffer) {
-        return modelMapper.map(offerRepository.findByYear(yearOfOffer).orElse(null), ShowDetailedOfferInfoDto.class);
+    public ShowDetailedOfferInfoDto offerDetails(String id) {
+        return modelMapper.map(offerRepository.findById(id).orElse(null), ShowDetailedOfferInfoDto.class);
     }
 
-    public void removeOffer(Double price) {
-        offerRepository.deleteByPrice(price);
+    public void removeOffer(String id) {
+        offerRepository.deleteById(id);
     }
 
 
-    public AddOfferDto update(AddOfferDto offer) {
-        Optional<Offer> existingOffer = offerRepository.findByYear(offer.getYear());
-        if (existingOffer.isPresent()) {
-            return modelMapper.map(offerRepository.save(modelMapper.map(offer, Offer.class)), AddOfferDto.class);
-        } else {
-            throw new DataIntegrityViolationException("Exception of update");
-        }
-    }
+//    public AddOfferDto update(AddOfferDto offer) {
+//        Optional<Offer> existingOffer = offerRepository.findById(offer.getId());
+//        if (existingOffer.isPresent()) {
+//            return modelMapper.map(offerRepository.save(modelMapper.map(offer, Offer.class)), AddOfferDto.class);
+//        } else {
+//            throw new DataIntegrityViolationException("Exception of update");
+//        }
+//    }
 }

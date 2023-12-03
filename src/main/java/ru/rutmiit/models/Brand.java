@@ -18,7 +18,7 @@ public class Brand extends BaseEntity {
     }
 
 
-    @OneToMany(mappedBy = "brand", targetEntity = Model.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "brand", targetEntity = Model.class, cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public Set<Model> getModels() {
         return models;
     }

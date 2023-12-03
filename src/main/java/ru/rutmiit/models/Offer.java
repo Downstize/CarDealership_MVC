@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class Offer extends BaseEntity {
 
     private Model model;
-    private User user;
+    private User users;
     private String description;
     private EngineEnum engineEnum;
     private String imageURL;
@@ -23,7 +23,7 @@ public class Offer extends BaseEntity {
     private int year;
     private String seller;
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToOne
     public Model getModel() {
         return model;
     }
@@ -32,10 +32,10 @@ public class Offer extends BaseEntity {
         this.model = model;
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    public User getUser(){return user;}
+    @ManyToOne
+    public User getUsers(){return users;}
 
-    public void setUser(User user){ this.user = user;}
+    public void setUsers(User users){ this.users = users;}
 
     @Column(name = "description", nullable = false ,columnDefinition = "TEXT")
     public String getDescription() {
@@ -110,4 +110,6 @@ public class Offer extends BaseEntity {
     public void setSeller(String seller) {
         this.seller = seller;
     }
+
+
 }

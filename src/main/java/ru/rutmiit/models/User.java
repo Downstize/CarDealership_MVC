@@ -24,7 +24,7 @@ public class User  extends BaseEntity {
         offer = new HashSet<>();
     }
 
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToOne
     public UserRole getRole() {
         return role;
     }
@@ -87,13 +87,17 @@ public class User  extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     public Set<Offer> getOffer() {
         return offer;
     }
 
     public void setOffer(Set<Offer> offer) {
         this.offer = offer;
+    }
+
+    public String toString() {
+        return  userName;
     }
 
 }

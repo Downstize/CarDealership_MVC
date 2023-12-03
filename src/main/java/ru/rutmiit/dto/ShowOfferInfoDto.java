@@ -7,7 +7,7 @@ public class ShowOfferInfoDto {
 
     public String id;
     private String model;
-    private String user;
+    private String users;
     private Double price;
     private int year;
     private String seller;
@@ -53,11 +53,11 @@ public class ShowOfferInfoDto {
     }
 
     public String getUsers() {
-        return user;
+        return users;
     }
 
-    public void setUsers(String user) {
-        this.user = user;
+    public void setUsers(String users) {
+        this.users = users;
     }
 
 }

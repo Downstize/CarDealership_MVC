@@ -95,4 +95,8 @@ public class AddUserDto {
     public void setModified(LocalDate modified) {
         this.modified = modified;
     }
+
+    public String toString() {
+        return userName;
+    }
 }

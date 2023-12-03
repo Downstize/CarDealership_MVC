@@ -19,7 +19,7 @@ public class UserRole extends BaseEntityUUID {
         users = new HashSet<>();
     }
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany
     public Set<User> getUsers() {
         return users;
     }

@@ -36,7 +36,7 @@ public class OfferService {
     public void register(AddOfferDto offer) {
         Offer of = modelMapper.map(offer, Offer.class);
         of.setModel(modelRepository.findByName(offer.getModel()).orElse(null));
-        of.setUser(userRepository.findByUserName(offer.getUsers()).orElse(null));
+        of.setUsers(userRepository.findByUserName(offer.getUsers()).orElse(null));
         offerRepository.saveAndFlush(of);
     }
 

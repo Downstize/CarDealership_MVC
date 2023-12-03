@@ -68,7 +68,7 @@ public class ModelController {
     public String deleteModel(@PathVariable("model-name") String modelName) {
         modelService.removeModel(modelName);
 
-        return "redirect:/models/model/all";
+        return "redirect:/";
     }
 
 }

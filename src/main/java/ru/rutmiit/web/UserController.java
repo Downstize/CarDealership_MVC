@@ -64,6 +64,6 @@ public class UserController {
     public String deleteUser(@PathVariable("user-name") String userName) {
         userService.removeUser(userName);
 
-        return "redirect:/user/all";
+        return "redirect:/";
     }
 }

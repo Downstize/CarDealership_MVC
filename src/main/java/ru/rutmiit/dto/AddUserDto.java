@@ -4,25 +4,27 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
+import ru.rutmiit.models.Enum.RoleEnum;
 
 import java.time.LocalDate;
 
 public class AddUserDto {
-    private String role;
+    private RoleEnum role;
     private String userName;
     private String password;
     private String firstName;
     private String lastName;
     private String imageURL;
     private LocalDate created;
+    private LocalDate modified;
 
 
     @NotNull(message = "UserRole cannot be null or empty!")
-    public String getRole() {
+    public RoleEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleEnum role) {
         this.role = role;
     }
 
@@ -85,5 +87,12 @@ public class AddUserDto {
         this.created = created;
     }
 
+    @NotNull(message = "Date of model modified cannot be null or empty!")
+    public LocalDate getModified() {
+        return modified;
+    }
 
+    public void setModified(LocalDate modified) {
+        this.modified = modified;
+    }
 }

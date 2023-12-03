@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_account")
+@Table(name = "users")
 public class User  extends BaseEntity {
 
     private UserRole role;
@@ -19,7 +19,6 @@ public class User  extends BaseEntity {
     private String firstName;
     private String lastName;
     private boolean isActive;
-    private RoleEnum roleEnum;
     private String imageUrl;
 
     public User() {
@@ -98,13 +97,4 @@ public class User  extends BaseEntity {
         this.offer = offer;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    public RoleEnum getRoleEnum() {
-        return roleEnum;
-    }
-
-    public void setRoleEnum(RoleEnum roleEnum) {
-        this.roleEnum = roleEnum;
-    }
 }

@@ -4,12 +4,11 @@ import org.modelmapper.ModelMapper;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.dto.AddUserDto;
 import ru.rutmiit.dto.ShowDetailedUserInfoDto;
-import ru.rutmiit.models.Brand;
 import ru.rutmiit.models.User;
 import ru.rutmiit.repositories.UserRepository;
+import ru.rutmiit.repositories.UserRoleRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,19 +20,20 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
-    public UserService(ModelMapper modelMapper, UserRepository userRepository) {
+    private final UserRoleRepository userRoleRepository;
+
+    public UserService(ModelMapper modelMapper, UserRepository userRepository, UserRoleRepository userRoleRepository) {
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
     }
 
 
     public void addUser(AddUserDto user) {
         User u = modelMapper.map(user, User.class);
-        if (u.getId() == null || !userRepository.existsById(u.getId())) {
-            userRepository.saveAndFlush(u);
-        }
+        u.setRole(userRoleRepository.findByRoleEnum(user.getRole()).orElse(null));
+        userRepository.saveAndFlush(u);
     }
-
 
     public List<AddUserDto> getAll() {
         return userRepository.findAll().stream().map((s) -> modelMapper.map(s, AddUserDto.class)).collect(Collectors.toList());

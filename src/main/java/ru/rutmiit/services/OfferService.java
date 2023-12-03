@@ -6,8 +6,11 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddOfferDto;
 import ru.rutmiit.dto.ShowDetailedOfferInfoDto;
+import ru.rutmiit.dto.ShowOfferInfoDto;
 import ru.rutmiit.models.Offer;
+import ru.rutmiit.repositories.ModelRepository;
 import ru.rutmiit.repositories.OfferRepository;
+import ru.rutmiit.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,25 +21,27 @@ public class OfferService {
 
     private final ModelMapper modelMapper;
     private final OfferRepository offerRepository;
+    private final ModelRepository modelRepository;
 
-    public OfferService(ModelMapper modelMapper, OfferRepository offerRepository) {
+    private final UserRepository userRepository;
+
+    public OfferService(ModelMapper modelMapper, OfferRepository offerRepository, ModelRepository modelRepository, UserRepository userRepository) {
         this.modelMapper = modelMapper;
         this.offerRepository = offerRepository;
+        this.modelRepository = modelRepository;
+        this.userRepository = userRepository;
     }
 
 
     public void register(AddOfferDto offer) {
-
-                Offer b = modelMapper.map(offer, Offer.class);
-            if (b.getId() == null || findOffer(b.getId()).isEmpty()) {
-                 modelMapper.map(offerRepository.saveAndFlush(b), AddOfferDto.class);
-            }
-
+        Offer of = modelMapper.map(offer, Offer.class);
+        of.setModel(modelRepository.findByName(offer.getModel()).orElse(null));
+        of.setUser(userRepository.findByUserName(offer.getUsers()).orElse(null));
+        offerRepository.saveAndFlush(of);
     }
 
-
     public List<AddOfferDto> getAll() {
-        return offerRepository.findAll().stream().map((s) -> modelMapper.map(s, AddOfferDto.class)).collect(Collectors.toList());
+        return offerRepository.findAll().stream().map((offer) -> modelMapper.map(offer, AddOfferDto.class)).collect(Collectors.toList());
     }
 
 

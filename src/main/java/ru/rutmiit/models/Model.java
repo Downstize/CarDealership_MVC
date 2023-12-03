@@ -88,4 +88,8 @@ public class Model extends BaseEntity {
         this.endYear = endYear;
     }
 
+    public String toString() {
+        return name;
+    }
+
 }

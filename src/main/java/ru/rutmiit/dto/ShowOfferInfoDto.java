@@ -1,7 +1,11 @@
 package ru.rutmiit.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 public class ShowOfferInfoDto {
     private String model;
+    private String user;
     private String description;
     private Double price;
     private int year;
@@ -46,6 +50,14 @@ public class ShowOfferInfoDto {
 
     public void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    public String getUsers() {
+        return user;
+    }
+
+    public void setUsers(String user) {
+        this.user = user;
     }
 
 }

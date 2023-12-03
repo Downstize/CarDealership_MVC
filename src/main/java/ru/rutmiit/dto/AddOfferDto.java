@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public class AddOfferDto {
     private String model;
-    private String user;
+    private String users;
     private String description;
     private EngineEnum engineEnum;
     private String imageURL;
@@ -35,11 +35,11 @@ public class AddOfferDto {
     @NotEmpty(message = "User name cannot be null or empty!")
     @Size(min = 2, message = "User name should be at least 2 characters long!")
     public String getUsers() {
-        return user;
+        return users;
     }
 
-    public void setUsers(String user) {
-        this.user = user;
+    public void setUsers(String users) {
+        this.users = users;
     }
 
     @NotEmpty(message = "Description must not be null or empty!")

@@ -17,7 +17,7 @@ public class User  extends BaseEntity {
     private String password;
     private String firstName;
     private String lastName;
-    private boolean isActive;
+    private boolean isActive = true;
     private String imageUrl;
 
     public User() {

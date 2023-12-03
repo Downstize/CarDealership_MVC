@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
-                <h2 class="text-center text-dark mt-5">All Users</h2>
+                <h2 class="text-center text-dark mt-5">All User Roles</h2>
                 <div th:each="u : ${userRoleInfos}" class="d-flex flex-column bg-text mb-3">
                     <h2 th:text="'Role: ' + ${u.roleEnum}"></h2>
                     <h4><a class="btn btn-danger align-bottom"
                            th:href="@{/usersRole/userRole-delete/{user-role}(user-role=${u.roleEnum})}">Delete
-                        User</a></h4>
+                        Role</a></h4>
                 </div>
             </div>
         </div>

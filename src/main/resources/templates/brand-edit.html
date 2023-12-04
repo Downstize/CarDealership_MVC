@@ -33,7 +33,9 @@
                     th:field="*{created}"
                    th:errorclass="is-invalid"
                    type="date" class="form-control text-center" id="created"
-                   name="created"/>
+                   name="created"
+                   placeholder="created"
+            />
             <small th:if="${#fields.hasErrors('created')}" th:errors="*{created}" class="text-danger">Error message</small>
           </div>
           <button type="submit" class="btn btn-secondary">Save Changes</button>

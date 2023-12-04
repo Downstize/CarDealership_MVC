@@ -60,22 +60,19 @@ public class BrandService {
 //    }
 
     public void editBrand(String originalBrandName, AddBrandDto brandDto) {
-        // Retrieve the existing brand by the original name
         Optional<Brand> existingBrandOptional = brandRepository.findByName(originalBrandName);
 
         if (existingBrandOptional.isPresent()) {
             Brand existingBrand = existingBrandOptional.get();
-
-            // Update properties of existingBrand with values from brandDto
             existingBrand.setName(brandDto.getName());
             existingBrand.setCreated(brandDto.getCreated());
-            // Update other properties as needed
+            existingBrand.setModified(LocalDate.now());
 
-            // Save the updated brand
-            brandRepository.save(existingBrand);
+            brandRepository.saveAndFlush(existingBrand);
         } else {
             throw new NoSuchElementException("Brand not found for update: " + originalBrandName);
         }
     }
+
 
 }

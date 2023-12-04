@@ -11,6 +11,7 @@ public class AddBrandDto {
     @UniqueBrandName
     private String name;
     private LocalDate created;
+//    private LocalDate modified;
 
     @NotEmpty(message = "Brand name cannot be null or empty!")
     @Size(min = 2, message = "Brand name should be at least 2 characters long!")
@@ -30,5 +31,14 @@ public class AddBrandDto {
     public void setCreated(LocalDate created) {
         this.created = created;
     }
+
+//    @NotNull(message = "Date of brand modified cannot be null or empty!")
+//    public LocalDate getModified() {
+//        return modified;
+//    }
+//
+//    public void setModified(LocalDate modified) {
+//        this.modified = modified;
+//    }
 
 }

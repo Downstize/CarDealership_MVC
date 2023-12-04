@@ -17,12 +17,15 @@
             <h2>Brand</h2>
             <h4 th:text="'Name: ' + ${brandDetails.name}"></h4>
             <h4 th:text="'Created: ' + ${brandDetails.created}"></h4>
-            <div class="align-bottom"><a class="btn btn-danger align-bottom"
-                                         th:href="@{/brands/brand-delete/{brand-name}(brand-name=${brandDetails.name})}">Delete brand</a>
+            <div th:if="${brandDetails.modified != null}">
+              <h4 th:text="'Modified: ' + ${brandDetails.modified}"></h4>
+            </div>
+            <div class="align-bottom">
+              <a class="btn btn-danger align-bottom" th:href="@{/brands/brand-delete/{brand-name}(brand-name=${brandDetails.name})}">Delete brand</a>
             </div>
             <div style="padding-top: 20px"></div>
-            <div class="align-bottom"><a class="btn btn-warning align-bottom"
-                                         th:href="@{/brands/brand-edit/{brand-name}(brand-name=${brandDetails.name})}">Edit brand</a>
+            <div class="align-bottom">
+              <a class="btn btn-warning align-bottom" th:href="@{/brands/brand-edit/{brand-name}(brand-name=${brandDetails.name})}">Edit brand</a>
             </div>
           </div>
         </div>

@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.rutmiit.dto.AddBrandDto;
+import ru.rutmiit.dto.ShowDetailedBrandInfoDto;
+import ru.rutmiit.models.Brand;
 import ru.rutmiit.services.BrandService;
 
 @Controller
@@ -58,6 +60,27 @@ public class BrandController {
     public String deleteBrand(@PathVariable("brand-name") String brandName) {
         brandService.removeBrand(brandName);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/brand-edit/{brand-name}")
+    public String editBrandForm(@PathVariable("brand-name") String brandName, Model model) {
+
+        AddBrandDto brand = brandService.findBrandByName(brandName);
+
+        model.addAttribute("brand", brand);
+        return "brand-edit";
+    }
+    @PostMapping("/brand-edit/{brand-name}")
+    public String editBrand(@PathVariable("brand-name") String brandName, @Valid AddBrandDto brandDto, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            // Handle errors, perhaps by returning to the edit page with error messages
+            model.addAttribute("brand", brandDto);
+            return "brand-edit";
+        }
+
+        brandService.editBrand(brandName, brandDto);
         return "redirect:/";
     }
 

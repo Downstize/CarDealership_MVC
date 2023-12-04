@@ -9,7 +9,7 @@
       <div class="col-md-2"></div>
       <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
         <div class="justify-content-center">
-          <h1>Add User</h1>
+          <h1>Add User Role</h1>
         </div>
         <form th:action="@{/usersRole/userRole/create}"
               th:method="post"
@@ -24,7 +24,7 @@
             <small th:if="${#fields.hasErrors('roleEnum')}" th:errors="*{roleEnum}" class="text-danger">Error
               message</small>
           </div>
-          <button type="submit" class="btn btn-secondary">Add User</button>
+          <button type="submit" class="btn btn-secondary">Add User Role</button>
         </form>
       </div>
     </div>

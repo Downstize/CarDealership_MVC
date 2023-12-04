@@ -10,7 +10,9 @@ import ru.rutmiit.dto.ShowDetailedBrandInfoDto;
 import ru.rutmiit.models.Brand;
 import ru.rutmiit.repositories.BrandRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -51,12 +53,29 @@ public class BrandService {
     }
 
 
-    public AddBrandDto update(AddBrandDto brand) {
-        Optional<Brand> existingBrand = brandRepository.findByName(brand.getName());
-        if (existingBrand.isPresent()) {
-            return modelMapper.map(brandRepository.save(modelMapper.map(brand, Brand.class)), AddBrandDto.class);
+//    public AddBrandDto editBrand(AddBrandDto brand) {
+//        Brand b = modelMapper.map(brand, Brand.class);
+////        b.setModified(new LocalDate());
+//        return modelMapper.map(brandRepository.saveAndFlush(b), AddBrandDto.class);
+//    }
+
+    public void editBrand(String originalBrandName, AddBrandDto brandDto) {
+        // Retrieve the existing brand by the original name
+        Optional<Brand> existingBrandOptional = brandRepository.findByName(originalBrandName);
+
+        if (existingBrandOptional.isPresent()) {
+            Brand existingBrand = existingBrandOptional.get();
+
+            // Update properties of existingBrand with values from brandDto
+            existingBrand.setName(brandDto.getName());
+            existingBrand.setCreated(brandDto.getCreated());
+            // Update other properties as needed
+
+            // Save the updated brand
+            brandRepository.save(existingBrand);
         } else {
-            throw new DataIntegrityViolationException("Exception of update!");
+            throw new NoSuchElementException("Brand not found for update: " + originalBrandName);
         }
     }
+
 }

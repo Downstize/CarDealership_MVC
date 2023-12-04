@@ -24,6 +24,7 @@ public class AddOfferDto {
     private String seller;
 
 
+
     @NotEmpty(message = "Name of model cannot be null or empty!")
     @Size(min = 2, message = "Name of model should be at least 2 characters long!")
     public String getModel() {

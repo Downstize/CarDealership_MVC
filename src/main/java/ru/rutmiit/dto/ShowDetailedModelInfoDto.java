@@ -12,6 +12,8 @@ public class ShowDetailedModelInfoDto {
     private int startYear;
     private int endYear;
     private LocalDate created;
+    private LocalDate modified;
+
 
     public String getBrand() {
         return brand;
@@ -67,6 +69,14 @@ public class ShowDetailedModelInfoDto {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public LocalDate getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDate modified) {
+        this.modified = modified;
     }
 
 }

@@ -20,7 +20,7 @@ public class AddModelDto {
     private String imageURL;
     private int startYear;
     private int endYear;
-    private LocalDate created;
+//    private LocalDate created;
 
 
     @NotEmpty(message = "Name of brand cannot be null or empty!")
@@ -81,15 +81,15 @@ public class AddModelDto {
     public void setEndYear(int endYear) {
         this.endYear = endYear;
     }
-
-    @NotNull(message = "Date of model create cannot be null or empty!")
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
+//
+//    @NotNull(message = "Date of model create cannot be null or empty!")
+//    public LocalDate getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(LocalDate created) {
+//        this.created = created;
+//    }
 
 
 }

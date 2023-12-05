@@ -4,14 +4,18 @@ package ru.rutmiit.services;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.dto.AddModelDto;
 import ru.rutmiit.dto.ShowDetailedModelInfoDto;
 import ru.rutmiit.dto.ShowModelInfoDto;
+import ru.rutmiit.models.Brand;
 import ru.rutmiit.models.Model;
 import ru.rutmiit.repositories.BrandRepository;
 import ru.rutmiit.repositories.ModelRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,6 +36,7 @@ public class ModelService {
 
     public void addModel(AddModelDto addModelDto) {
         Model model = modelMapper.map(addModelDto, Model.class);
+        model.setCreated(LocalDate.now());
         model.setBrand(brandRepository.findByName(addModelDto.getBrand()).orElse(null));
         modelRepository.saveAndFlush(model);
     }
@@ -41,8 +46,10 @@ public class ModelService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<AddModelDto> findModel(String id) {
-        return Optional.ofNullable(modelMapper.map(modelRepository.findById(id), AddModelDto.class));
+    public AddModelDto findModelByName(String modelName) {
+        return modelRepository.findByName(modelName)
+                .map(model -> modelMapper.map(model, AddModelDto.class))
+                .orElse(null);
     }
 
     public ShowDetailedModelInfoDto modelDetails(String modelName) {
@@ -69,5 +76,33 @@ public class ModelService {
                 .map(model -> modelMapper.map(model, AddModelDto.class))
                 .collect(Collectors.toList());
     }
+
+    public void editModel(String originalModelName, AddModelDto modelDto) {
+        Optional<Model> existingModelOptional = modelRepository.findByName(originalModelName);
+
+        if (existingModelOptional.isPresent()) {
+            Model existingModel = existingModelOptional.get();
+
+            // Assuming you have a brandRepository to fetch the Brand entity
+            Optional<Brand> brandOptional = brandRepository.findByName(modelDto.getBrand());
+            if (brandOptional.isPresent()) {
+                existingModel.setBrand(brandOptional.get());
+            } else {
+                throw new NoSuchElementException("Brand not found: " + modelDto.getBrand());
+            }
+
+            existingModel.setName(modelDto.getName());
+            existingModel.setCategoryEnum(modelDto.getCategoryEnum());
+            existingModel.setImageUrl(modelDto.getImageURL());
+            existingModel.setStartYear(modelDto.getStartYear());
+            existingModel.setEndYear(modelDto.getEndYear());
+            existingModel.setModified(LocalDate.now());
+
+            modelRepository.saveAndFlush(existingModel);
+        } else {
+            throw new NoSuchElementException("Model not found for update: " + originalModelName);
+        }
+    }
+
 
 }

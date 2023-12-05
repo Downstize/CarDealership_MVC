@@ -21,10 +21,17 @@
             <h4 th:text="'Start year: ' + ${modelDetails.startYear}"></h4>
             <h4 th:text="'End year: ' + ${modelDetails.endYear}"></h4>
             <h4 th:text="'Created: ' + ${modelDetails.created}"></h4>
+            <div th:if="${modelDetails.modified != null}">
+              <h4 th:text="'Modified: ' + ${modelDetails.modified}"></h4>
+            </div>
             <div class="align-bottom">
               <a class="btn btn-danger align-bottom"
                  th:href="@{/models/model-delete/{model-name}(model-name=${modelDetails.name})}">Delete
                 Model</a>
+            </div>
+            <div style="padding-top: 20px"></div>
+            <div class="align-bottom">
+              <a class="btn btn-warning align-bottom" th:href="@{/models/model-edit/{model-name}(model-name=${modelDetails.name})}">Edit Model</a>
             </div>
           </div>
           <div class="col-md-6"><img src="/pic/bmw.png" height="350px"></div>

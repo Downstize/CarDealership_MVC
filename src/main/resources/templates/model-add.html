@@ -28,7 +28,6 @@
                                class="text-danger">Error
                             message</small>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label" for="name">Model Name</label>
                         <input th:field="*{name}"
@@ -96,7 +95,6 @@
                         <small th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}" class="text-danger">Error
                             message</small>
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label" for="endYear">End Year</label>
                         <input th:field="*{endYear}"
@@ -105,15 +103,6 @@
                         <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}" class="text-danger">Error
                             message</small>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="created">Created Date</label>
-                        <input th:field="*{created}"
-                               th:errorclass="is-invalid"
-                               type="date" class="form-control text-center" id="created"
-                               name="created"/>
-                        <small th:if="${#fields.hasErrors('created')}" th:errors="*{created}" class="text-danger">Error message</small>
-                    </div>
-
                     <button type="submit" class="btn btn-secondary">Add Model</button>
                 </form>
             </div>

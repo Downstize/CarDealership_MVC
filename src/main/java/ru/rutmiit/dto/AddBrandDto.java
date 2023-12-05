@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class AddBrandDto {
     @UniqueBrandName
     private String name;
-    private LocalDate created;
+//    private LocalDate created;
 //    private LocalDate modified;
 
     @NotEmpty(message = "Brand name cannot be null or empty!")
@@ -23,14 +23,14 @@ public class AddBrandDto {
         this.name = name;
     }
 
-    @NotNull(message = "Date of brand create cannot be null or empty!")
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
+//    @NotNull(message = "Date of brand create cannot be null or empty!")
+//    public LocalDate getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(LocalDate created) {
+//        this.created = created;
+//    }
 
 //    @NotNull(message = "Date of brand modified cannot be null or empty!")
 //    public LocalDate getModified() {
@@ -40,5 +40,6 @@ public class AddBrandDto {
 //    public void setModified(LocalDate modified) {
 //        this.modified = modified;
 //    }
+
 
 }

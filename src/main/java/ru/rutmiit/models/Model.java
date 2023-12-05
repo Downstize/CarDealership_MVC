@@ -91,5 +91,4 @@ public class Model extends BaseEntity {
     public String toString() {
         return name;
     }
-
 }

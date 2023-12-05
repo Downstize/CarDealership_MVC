@@ -27,9 +27,13 @@ public class BrandService {
         this.brandRepository = brandRepository;
     }
 
+
     public void addBrand(AddBrandDto brand) {
-        brandRepository.saveAndFlush(modelMapper.map(brand, Brand.class));
+        Brand brandEntity = modelMapper.map(brand, Brand.class);
+        brandEntity.setCreated(LocalDate.now());
+        brandRepository.saveAndFlush(brandEntity);
     }
+
 
     public List<ShowBrandInfoDto> getAll() {
         return brandRepository.findAll().stream().map((brand) -> modelMapper.map(brand, ShowBrandInfoDto.class)).collect(Collectors.toList());
@@ -65,7 +69,6 @@ public class BrandService {
         if (existingBrandOptional.isPresent()) {
             Brand existingBrand = existingBrandOptional.get();
             existingBrand.setName(brandDto.getName());
-            existingBrand.setCreated(brandDto.getCreated());
             existingBrand.setModified(LocalDate.now());
 
             brandRepository.saveAndFlush(existingBrand);

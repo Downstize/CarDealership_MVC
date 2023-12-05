@@ -75,7 +75,6 @@ public class BrandController {
     public String editBrand(@PathVariable("brand-name") String brandName, @Valid AddBrandDto brandDto, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            // Handle errors, perhaps by returning to the edit page with error messages
             model.addAttribute("brand", brandDto);
             return "brand-edit";
         }

@@ -23,16 +23,6 @@
                    aria-describedby="nameHelp" name="name"/>
             <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger">Error message</small>
           </div>
-
-          <div class="mb-3">
-            <label class="form-label" for="created">Created Date</label>
-            <input th:field="*{created}"
-                   th:errorclass="is-invalid"
-                   type="date" class="form-control text-center" id="created"
-                   name="created"/>
-            <small th:if="${#fields.hasErrors('created')}" th:errors="*{created}" class="text-danger">Error message</small>
-          </div>
-
           <button type="submit" class="btn btn-secondary">Add Brand</button>
         </form>
       </div>

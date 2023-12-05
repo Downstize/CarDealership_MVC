@@ -39,5 +39,4 @@ public class Brand extends BaseEntity {
     public String toString() {
         return name;
     }
-
 }

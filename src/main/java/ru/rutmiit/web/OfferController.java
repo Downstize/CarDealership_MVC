@@ -7,10 +7,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.rutmiit.dto.AddModelDto;
 import ru.rutmiit.dto.AddOfferDto;
 import ru.rutmiit.services.ModelService;
 import ru.rutmiit.services.OfferService;
 import ru.rutmiit.services.UserService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/offers")
@@ -69,6 +72,32 @@ public class OfferController {
     public String deleteOffer(@PathVariable("offer-id") String id) {
         offerService.removeOffer(id);
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/offer-edit/{offer-id}")
+    public String editOfferForm(@PathVariable("offer-id") String id, Model model) {
+
+        Optional<AddOfferDto> offerDto = offerService.findOffer(id);
+        model.addAttribute("availableModels", modelService.getAllModels());
+        model.addAttribute("availableUsers", userService.getAll());
+
+        model.addAttribute("offer", offerDto);
+        return "model-edit";
+    }
+    @PostMapping("/offer-edit/{offer-id}")
+    public String editOffer(@PathVariable("offer-id") String id, @Valid AddOfferDto offerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+
+        model.addAttribute("availableModels", modelService.getAllModels());
+        model.addAttribute("availableUsers", userService.getAll());
+
+        if(bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("offer", offerDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offer", bindingResult);
+            return "redirect:/offers/offer-edit";
+        }
+
+        offerService.editOffer(id, offerDto);
         return "redirect:/";
     }
 }

@@ -48,7 +48,12 @@ public class BrandService {
 
 
     public ShowDetailedBrandInfoDto brandDetails(String brandName) {
-        return modelMapper.map(brandRepository.findByName(brandName).orElse(null), ShowDetailedBrandInfoDto.class);
+
+        ShowDetailedBrandInfoDto brandDto = modelMapper.map(brandRepository.findByName(brandName).orElse(null), ShowDetailedBrandInfoDto.class);
+        brandDto.setName(brandName);
+        System.out.println(brandDto.getName());
+        System.out.println("-----");
+        return brandDto;
     }
 
 

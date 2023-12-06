@@ -20,10 +20,18 @@
                     <h2 th:text="'Year: ' + ${offerDetails.year}"></h2>
                     <h2 th:text="'Seller: ' + ${offerDetails.seller}"></h2>
                     <h2 th:text="'Created: ' + ${offerDetails.created}"></h2>
+                <div th:if="${offerDetails.modified != null}">
+                    <h4 th:text="'Modified: ' + ${offerDetails.modified}"></h4>
+                </div>
                     <h4><a class="btn btn-danger align-bottom"
-                           th:href="@{/offers/offer-delete/{offer-name}(offer-name=${offerDetails.id})}">Delete
+                           th:href="@{/offers/offer-delete/{offer-id}(offer-id=${offerDetails.id})}">Delete
                         Offer</a></h4>
             </div>
+            <div style="padding-top: 20px"></div>
+            <div class="align-bottom">
+                <a class="btn btn-warning align-bottom" th:href="@{/offers/offer-edit/{offer-id}(offer-id=${offerDetails.id})}">Edit Model</a>
+            </div>
+        </div>
         </div>
     </div>
 </main>

@@ -9,11 +9,11 @@
       <div class="col-md-2"></div>
       <div class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
         <div class="justify-content-center">
-          <h1>Add Offer</h1>
+          <h1>Edit Offer</h1>
         </div>
-        <form th:action="@{/offers/offer/create}"
+        <form th:action="@{/offers/offer-edit/{offer-id}(offer-id=${offer.id})}"
               th:method="post"
-              th:object="${offerModel}"
+              th:object="${offer}"
               class="m-md-auto w-50 pb-3">
           <div class="mb-3">
             <label class="form-label" for="model"><h5>All available models</h5></label>
@@ -156,7 +156,7 @@
               message</small>
           </div>
 
-          <button type="submit" class="btn btn-secondary">Add Offer</button>
+          <button type="submit" class="btn btn-secondary">Save Changes</button>
         </form>
       </div>
     </div>

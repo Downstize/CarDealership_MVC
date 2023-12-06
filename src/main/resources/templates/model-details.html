@@ -13,8 +13,8 @@
         </div>
         <div class="row bg-light rounded">
           <div class="col-md-6">
+            <!-- Existing Model Details -->
             <h2>Model</h2>
-            <h4 th:text="'Brand: ' + ${modelDetails.brand}"></h4>
             <h4 th:text="'Name: ' + ${modelDetails.name}"></h4>
             <h4 th:text="'Category: ' + ${modelDetails.categoryEnum}"></h4>
             <h4 th:text="'Image URL: ' + ${modelDetails.imageURL}"></h4>
@@ -26,15 +26,34 @@
             </div>
             <div class="align-bottom">
               <a class="btn btn-danger align-bottom"
-                 th:href="@{/models/model-delete/{model-name}(model-name=${modelDetails.name})}">Delete
-                Model</a>
+                 th:href="@{/models/model-delete/{model-name}(model-name=${modelDetails.name})}">Delete Model</a>
             </div>
             <div style="padding-top: 20px"></div>
             <div class="align-bottom">
               <a class="btn btn-warning align-bottom" th:href="@{/models/model-edit/{model-name}(model-name=${modelDetails.name})}">Edit Model</a>
             </div>
           </div>
-          <div class="col-md-6"><img src="/pic/bmw.png" height="350px"></div>
+          <h2>Brand</h2>
+          <div class="Container">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Brand</th>
+                <th scope="col">Created</th>
+                <th scope="col">Modified</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="brand, i : ${brandList}">
+                <th scope="row" th:text="${i.count}"></th>
+                <td th:text="${brandList.name}"></td>
+                <td th:text="${brandList.created}"></td>
+                <td th:text="${brandList.modified}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </main>
     </div>

@@ -15,7 +15,13 @@
                     <!-- <h2 th:text="'Category: ' + ${m.categoryEnum}"></h2> -->
                     <h2 th:text="'Start year: ' + ${m.startYear}"></h2>
                     <h2 th:text="'End Year: ' + ${m.endYear}"></h2>
-                    <h4><a class="btn-block" th:href="@{/models/model-details/{model-name}(model-name=${m.name})}">Detail info</a></h4>
+                    <h4>
+                        <form th:action="@{/models/model-details/{model-name}(model-name=${m.name})}" method="get">
+                            <input type="hidden" name="brand-name" th:value="${m.brand}" />
+                            <button type="submit" class="btn btn-warning">Detail info</button>
+                        </form>
+                    </h4>
+
                 </div>
 
             </div>

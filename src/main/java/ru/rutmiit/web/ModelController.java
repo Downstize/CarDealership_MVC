@@ -51,15 +51,16 @@ public class ModelController {
     @GetMapping("/model/all")
     public String showAllModels(Model model) {
         model.addAttribute("modelInfos", modelService.getAllModels());
-        model.addAttribute("brands", brandService.getAll()); // Add this line
+        model.addAttribute("brands", brandService.getAll());
 
         return "model-all";
     }
 
 
     @GetMapping("/model-details/{model-name}")
-    public String modelDetails(@PathVariable("model-name") String modelName, Model model) {
+    public String modelDetails(@PathVariable("model-name") String modelName, @RequestParam("brand-name") String brandName, Model model) {
         model.addAttribute("modelDetails", modelService.modelDetails(modelName));
+        model.addAttribute("brandList", brandService.brandDetails(brandName));
 
         return "model-details";
     }

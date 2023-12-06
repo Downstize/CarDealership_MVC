@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class AddOfferDto {
 
+    private String id;
     private String model;
     private String users;
     private String description;
@@ -20,11 +21,17 @@ public class AddOfferDto {
     private Double price;
     private TransmissionEnum transmissionEnum;
     private int year;
-    private LocalDate created;
+//    private LocalDate created;
     private String seller;
 
+    @NotEmpty(message = "Name of model cannot be null or empty!")
+    public String getId() {
+        return id;
+    }
 
-
+    public void setId(String id) {
+        this.id = id;
+    }
     @NotEmpty(message = "Name of model cannot be null or empty!")
     @Size(min = 2, message = "Name of model should be at least 2 characters long!")
     public String getModel() {
@@ -113,14 +120,14 @@ public class AddOfferDto {
         this.year = year;
     }
 
-    @NotNull(message = "Date of model create cannot be null or empty!")
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
+//    @NotNull(message = "Date of model create cannot be null or empty!")
+//    public LocalDate getCreated() {
+//        return created;
+//    }
+//
+//    public void setCreated(LocalDate created) {
+//        this.created = created;
+//    }
 
     @NotEmpty(message = "Seller name must not be null or empty!")
     @Size(min = 3, message = "Seller name must be at least 3 characters!")

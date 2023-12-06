@@ -18,6 +18,7 @@ public class ShowDetailedOfferInfoDto {
     private TransmissionEnum transmissionEnum;
     private int year;
     private LocalDate created;
+    private LocalDate modified;
     private String seller;
 
     public String getId() {
@@ -106,6 +107,13 @@ public class ShowDetailedOfferInfoDto {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+    public LocalDate getModified() {
+        return modified;
+    }
+
+    public void setModified(LocalDate modified) {
+        this.modified = modified;
     }
 
     public String getSeller() {

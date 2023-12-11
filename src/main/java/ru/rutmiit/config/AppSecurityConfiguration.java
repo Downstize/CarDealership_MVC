@@ -36,8 +36,8 @@ public class AppSecurityConfiguration {
                                         requestMatchers("/", "/users/login", "/users/register", "/users/login-error")
                                         .permitAll().
                                         requestMatchers("/users/profile").authenticated().
-                                        requestMatchers("/brands/add", "/models/add", "/offers/add").hasRole(RoleEnum.MODERATOR.name()).
-                                        requestMatchers("/usersRole/userRole/all","/users/user/all", "/users/add", "/usersRole/add", "/brands/brand/all").hasRole(RoleEnum.ADMIN.name()).
+                                        requestMatchers("/models/add", "/offers/add").hasRole(RoleEnum.MODERATOR.name()).
+                                        requestMatchers("/usersRole/userRole/all","/users/user/all", "/users/add", "/usersRole/add", "/brands/brand/all", "/brands/add").hasRole(RoleEnum.ADMIN.name()).
                                         anyRequest().authenticated()
                 )
                 .formLogin(

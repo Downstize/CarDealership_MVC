@@ -4,7 +4,7 @@
             <li class="nav-item">
                 <a class="nav-item nav-link text-dark" href="/">UVP-311 AutoCatalog</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/brands/add">Add Brand</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">

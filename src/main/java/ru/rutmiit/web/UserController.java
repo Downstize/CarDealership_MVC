@@ -12,7 +12,7 @@ import ru.rutmiit.services.UserRoleService;
 import ru.rutmiit.services.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
 

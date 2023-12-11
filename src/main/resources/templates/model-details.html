@@ -18,7 +18,7 @@
             <h4 th:text="'Brand: ' + ${modelDetails.brand}"></h4>
             <h4 th:text="'Name: ' + ${modelDetails.name}"></h4>
             <h4 th:text="'Category: ' + ${modelDetails.categoryEnum}"></h4>
-            <h4 th:text="'Image URL: ' + ${modelDetails.imageURL}"></h4>
+<!--            <img th:src="${modelDetails.imageURL}" width="500" height="300">-->
             <h4 th:text="'Start year: ' + ${modelDetails.startYear}"></h4>
             <h4 th:text="'End year: ' + ${modelDetails.endYear}"></h4>
             <h4 th:text="'Created: ' + ${modelDetails.created}"></h4>
@@ -33,6 +33,9 @@
             <div class="align-bottom">
               <a class="btn btn-warning align-bottom" th:href="@{/models/model-edit/{model-name}(model-name=${modelDetails.name})}">Edit Model</a>
             </div>
+          </div>
+          <div class="col-md-6 mt-3">
+            <img th:src="${modelDetails.imageURL}" class="img-fluid" alt="Model Image" width="400" height="300">
           </div>
           <h2>Brand</h2>
           <div class="Container">

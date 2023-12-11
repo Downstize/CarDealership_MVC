@@ -10,9 +10,8 @@
             <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
                 <h2 class="text-center text-dark mt-5">All Models</h2>
                 <div th:each="m : ${modelInfos}" class="d-flex flex-column bg-text mb-3">
-                    <h2 th:text="'Brand: ' + ${m.brand}"></h2> <!-- Modified Line -->
+                    <h2 th:text="'Brand: ' + ${m.brand}"></h2>
                     <h2 th:text="'Model: ' + ${m.name}"></h2>
-                    <!-- <h2 th:text="'Category: ' + ${m.categoryEnum}"></h2> -->
                     <h2 th:text="'Start year: ' + ${m.startYear}"></h2>
                     <h2 th:text="'End Year: ' + ${m.endYear}"></h2>
                     <h4>

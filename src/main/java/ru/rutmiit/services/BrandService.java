@@ -2,6 +2,9 @@ package ru.rutmiit.services;
 
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.rutmiit.dto.AddBrandDto;
@@ -17,6 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@EnableCaching
 public class BrandService {
 
     private final  ModelMapper modelMapper;
@@ -28,14 +32,20 @@ public class BrandService {
     }
 
 
+    @CacheEvict(cacheNames = "brands", allEntries = true)
     public void addBrand(AddBrandDto brand) {
         Brand brandEntity = modelMapper.map(brand, Brand.class);
         brandEntity.setCreated(LocalDate.now());
         brandRepository.saveAndFlush(brandEntity);
     }
 
-
+    @Cacheable("brands")
     public List<ShowBrandInfoDto> getAll() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return brandRepository.findAll().stream().map((brand) -> modelMapper.map(brand, ShowBrandInfoDto.class)).collect(Collectors.toList());
     }
 
@@ -56,7 +66,7 @@ public class BrandService {
         return brandDto;
     }
 
-
+    @CacheEvict(cacheNames = "brands", allEntries = true)
     public void removeBrand(String brandName) {
         brandRepository.deleteByName(brandName);
     }

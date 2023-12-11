@@ -7,18 +7,18 @@
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/brands/add">Add Brand</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/models/add">Add Model</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/offers/add">Add Offer</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/users/add">Add User</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
-                <a class="nav-item nav-link text-dark" href="/usersRole/add">Add User Role</a>
-            </li>
+<!--            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">-->
+<!--                <a class="nav-item nav-link text-dark" href="/usersRole/add">Add User Role</a>-->
+<!--            </li>-->
             <li class="nav-item">
                 <a class="nav-item nav-link text-dark" href="/brands/brand/all">All Brands</a>
             </li>
@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-item nav-link text-dark" href="/offers/offer/all">All Offers</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/users/user/all">All Users</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">

@@ -36,10 +36,8 @@ public class Init implements CommandLineRunner {
 
     private void initRoles() {
         if (userRoleRepository.count() == 0) {
-            var moderatorRole = new UserRole(RoleEnum.MODERATOR);
             var adminRole = new UserRole(RoleEnum.ADMIN);
             var normalUserRole = new UserRole(RoleEnum.USER);
-            userRoleRepository.save(moderatorRole);
             userRoleRepository.save(adminRole);
             userRoleRepository.save(normalUserRole);
         }
@@ -48,7 +46,6 @@ public class Init implements CommandLineRunner {
     private void initUsers() {
         if (userRepository.count() == 0) {
             initAdmin();
-            initModerator();
             initNormalUser();
         }
     }
@@ -63,22 +60,12 @@ public class Init implements CommandLineRunner {
        userRepository.save(adminUser);
     }
 
-    private void initModerator(){
-
-        var moderatorRole = userRoleRepository.
-                findByRoleEnum(RoleEnum.MODERATOR).orElseThrow();
-
-        var moderatorUser = new User("venceslao", passwordEncoder.encode(defaultPassword), "venceslao@gmail.com", "Venceslao", "Moderation", 25);
-        moderatorUser.setRole(List.of(moderatorRole));
-
-        userRepository.save(moderatorUser);
-    }
 
     private void initNormalUser(){
         var userRole = userRoleRepository.
                 findByRoleEnum(RoleEnum.USER).orElseThrow();
 
-        var normalUser = new User("user", "123456789", "user@gmail.com", "User", "Userovich", 34);
+        var normalUser = new User("user", passwordEncoder.encode(defaultPassword), "user@gmail.com", "User", "Userovich", 34);
         normalUser.setRole(List.of(userRole));
 
         userRepository.save(normalUser);

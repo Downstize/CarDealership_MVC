@@ -9,10 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.services.BrandService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.security.Principal;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/brands")
 public class BrandController {
+
+    private static final Logger LOG = Logger.getLogger(String.valueOf(Controller.class));
+
 
     @Autowired
     private final BrandService brandService;
@@ -39,8 +50,10 @@ public class BrandController {
         return "redirect:/";
     }
 
+
     @GetMapping("/brand/all")
-    public String showAllBrands(Model model) {
+    public String showAllBrands(Model model, Principal principal) {
+        LOG.log(Level.INFO, "Show all Brands for " + principal.getName());
         model.addAttribute("brandInfos", brandService.getAll());
 
         return "brand-all";

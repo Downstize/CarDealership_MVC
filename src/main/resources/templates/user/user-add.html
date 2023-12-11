@@ -41,7 +41,7 @@
                         <label class="form-label" for="password">Password</label>
                         <input th:field="*{password}"
                                th:errorclass="is-invalid"
-                               type="text" class="form-control text-center"
+                               type="password" class="form-control text-center"
                                id="password" aria-describedby="password" name="password"/>
                         <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Error
                             message</small>

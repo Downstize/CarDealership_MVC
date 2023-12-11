@@ -11,6 +11,7 @@ import ru.rutmiit.models.User;
 import ru.rutmiit.repositories.UserRepository;
 import ru.rutmiit.repositories.UserRoleRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,11 +31,12 @@ public class UserService {
     }
 
 
-    public void addUser(AddUserDto user) {
-        User u = modelMapper.map(user, User.class);
-        u.setRole(userRoleRepository.findByRoleEnum(user.getRole()).orElse(null));
-        userRepository.saveAndFlush(u);
-    }
+//    public void addUser(AddUserDto user) {
+//        User u = modelMapper.map(user, User.class);
+//        u.setCreated(LocalDate.now());
+//        u.setRole(userRoleRepository.findByRole(user.getRole()).orElse(null));
+//        userRepository.saveAndFlush(u);
+//    }
 
     public List<ShowUserInfoDto> getAll() {
         return userRepository.findAll().stream().map((user) -> modelMapper.map(user, ShowUserInfoDto.class)).collect(Collectors.toList());

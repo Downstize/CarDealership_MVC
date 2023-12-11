@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import ru.rutmiit.dto.AddBrandDto;
 import ru.rutmiit.dto.AddModelDto;
 import ru.rutmiit.services.BrandService;
 import ru.rutmiit.services.ModelService;

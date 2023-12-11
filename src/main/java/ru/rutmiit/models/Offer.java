@@ -56,7 +56,7 @@ public class Offer extends BaseEntity {
         this.engineEnum = engineEnum;
     }
 
-    @Column(name = "imagine_url", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "imagine_url", columnDefinition = "TEXT")
     public String getImageUrl() {
         return imageURL;
     }

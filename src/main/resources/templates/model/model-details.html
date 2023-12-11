@@ -15,6 +15,7 @@
           <div class="col-md-6">
             <!-- Existing Model Details -->
             <h2>Model</h2>
+            <h4 th:text="'Brand: ' + ${modelDetails.brand}"></h4>
             <h4 th:text="'Name: ' + ${modelDetails.name}"></h4>
             <h4 th:text="'Category: ' + ${modelDetails.categoryEnum}"></h4>
             <h4 th:text="'Image URL: ' + ${modelDetails.imageURL}"></h4>
@@ -40,15 +41,15 @@
               <tr>
                 <th scope="col">Brand</th>
                 <th scope="col">Created</th>
-                <th scope="col">Modified</th>
+                <th  th:if="${brandList.modified != null}" scope="col">Modified</th>
               </tr>
               </thead>
               <tbody>
               <tr th:each="brand, i : ${brandList}">
-                <th scope="row" th:text="${i.count}"></th>
                 <td th:text="${brandList.name}"></td>
                 <td th:text="${brandList.created}"></td>
-                <td th:text="${brandList.modified}"></td>
+                <td th:if="${brandList.modified != null}" th:text="${brandList.modified}"></td>
+                <td th:unless="${brandList.modified != null}" style="visibility: hidden;"></td>
               </tr>
               </tbody>
             </table>

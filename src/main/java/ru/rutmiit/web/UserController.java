@@ -12,7 +12,7 @@ import ru.rutmiit.services.UserRoleService;
 import ru.rutmiit.services.UserService;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
 
@@ -41,7 +41,7 @@ public class UserController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
             return "redirect:/users/add";
         }
-        userService.addUser(userModel);
+//        userService.addUser(userModel);
 
         return "redirect:/";
     }

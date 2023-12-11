@@ -7,11 +7,14 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.rutmiit.models.Enum.RoleEnum;
 import ru.rutmiit.models.UserRole;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface UserRoleRepository extends JpaRepository<UserRole, String> {
     Optional<UserRole> findByRoleEnum(RoleEnum roleEnum);
+
+//    Optional<List<UserRole>> findByRole(RoleEnum roleEnum);
 
     @Modifying
     @Transactional

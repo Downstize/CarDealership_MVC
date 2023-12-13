@@ -1,6 +1,9 @@
 package ru.rutmiit.web;
 
 import jakarta.validation.Valid;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +17,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.security.Principal;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/brands")
 public class BrandController {
 
-    private static final Logger LOG = Logger.getLogger(String.valueOf(Controller.class));
+    private static final Logger LOG = LogManager.getLogger(Controller.class);
 
 
     @Autowired
@@ -53,7 +53,7 @@ public class BrandController {
 
     @GetMapping("/brand/all")
     public String showAllBrands(Model model, Principal principal) {
-        LOG.log(Level.INFO, "Show all Brands for " + principal.getName());
+        LOG.log(Level.INFO, "show all brands for: " + principal.getName());
         model.addAttribute("brandInfos", brandService.getAll());
 
         return "brand-all";

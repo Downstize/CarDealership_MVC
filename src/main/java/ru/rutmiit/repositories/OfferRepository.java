@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rutmiit.models.Offer;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -16,4 +17,6 @@ public interface OfferRepository extends JpaRepository<Offer, String> {
     @Modifying
     @Transactional
     void deleteById(String id);
+
+    Optional<Object> findByModelName(String modelName);
 }

@@ -2,7 +2,7 @@
     <div class="navbar" id="navbarNavAltMarkup">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-item nav-link text-dark" href="/">UVP-311 AutoCatalog</a>
+                <a class="nav-item nav-link text-dark" href="/">AutoLife</a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/brands/add">Add Brand</a>
@@ -13,20 +13,20 @@
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/offers/add">Add Offer</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
-                <a class="nav-item nav-link text-dark" href="/users/add">Add User</a>
-            </li>
+<!--            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">-->
+<!--                <a class="nav-item nav-link text-dark" href="/users/add">Add User</a>-->
+<!--            </li>-->
 <!--            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">-->
 <!--                <a class="nav-item nav-link text-dark" href="/usersRole/add">Add User Role</a>-->
 <!--            </li>-->
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/brands/brand/all">All Brands</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/models/model/all">All Models</a>
             </li>
             <li class="nav-item">
-                <a class="nav-item nav-link text-dark" href="/offers/offer/all">All Offers</a>
+                <a class="nav-item nav-link text-dark" href="/offers/offer/all">OUR OFFERS</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
                 <a class="nav-item nav-link text-dark" href="/users/user/all">All Users</a>

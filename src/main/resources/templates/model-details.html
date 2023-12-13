@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head"/>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
@@ -7,57 +7,54 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2"></div>
-      <main class="jumbotron text-center rounded col-md-12 align-self-center pt-5">
-        <div class="justify-content-center">
-          <h1>Model Details</h1>
+      <main class="col-md-8 mt-5">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h1 class="card-title text-center">Model Details</h1>
+            <div class="row bg-light rounded">
+              <div class="col-md-6">
+                <h2>Model</h2>
+                <h4 th:text="'Brand: ' + ${modelDetails.brand}"></h4>
+                <h4 th:text="'Name: ' + ${modelDetails.name}"></h4>
+                <h4 th:text="'Category: ' + ${modelDetails.categoryEnum}"></h4>
+                <h4 th:text="'Start year: ' + ${modelDetails.startYear}"></h4>
+                <h4 th:text="'End year: ' + ${modelDetails.endYear}"></h4>
+                <h4 th:text="'Created: ' + ${modelDetails.created}"></h4>
+                <div th:if="${modelDetails.modified != null}">
+                  <h4 th:text="'Modified: ' + ${modelDetails.modified}"></h4>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                  <a class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/models/model-delete/{model-name}(model-name=${modelDetails.name})}">Delete Model</a>
+                  <a class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/models/model-edit/{model-name}(model-name=${modelDetails.name})}">Edit Model</a>
+                </div>
+              </div>
+              <div class="col-md-6 mt-1">
+                <img th:src="${modelDetails.imageURL}" class="img-fluid rounded" alt="Model Image">
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row bg-light rounded">
-          <div class="col-md-6">
-            <!-- Existing Model Details -->
-            <h2>Model</h2>
-            <h4 th:text="'Brand: ' + ${modelDetails.brand}"></h4>
-            <h4 th:text="'Name: ' + ${modelDetails.name}"></h4>
-            <h4 th:text="'Category: ' + ${modelDetails.categoryEnum}"></h4>
-<!--            <img th:src="${modelDetails.imageURL}" width="500" height="300">-->
-            <h4 th:text="'Start year: ' + ${modelDetails.startYear}"></h4>
-            <h4 th:text="'End year: ' + ${modelDetails.endYear}"></h4>
-            <h4 th:text="'Created: ' + ${modelDetails.created}"></h4>
-            <div th:if="${modelDetails.modified != null}">
-              <h4 th:text="'Modified: ' + ${modelDetails.modified}"></h4>
-            </div>
-            <div class="align-bottom">
-              <a class="btn btn-danger align-bottom"
-                 th:href="@{/models/model-delete/{model-name}(model-name=${modelDetails.name})}">Delete Model</a>
-            </div>
-            <div style="padding-top: 20px"></div>
-            <div class="align-bottom">
-              <a class="btn btn-warning align-bottom" th:href="@{/models/model-edit/{model-name}(model-name=${modelDetails.name})}">Edit Model</a>
-            </div>
-          </div>
-          <div class="col-md-6 mt-3">
-            <img th:src="${modelDetails.imageURL}" class="img-fluid" alt="Model Image" width="400" height="300">
-          </div>
-          <h2>Brand</h2>
-          <div class="Container">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="card-title">Brand</h2>
             <table class="table">
               <thead>
-              <tr>
+              <tr th:each="b : ${brandList}">
                 <th scope="col">Brand</th>
                 <th scope="col">Created</th>
-                <th  th:if="${brandList.modified != null}" scope="col">Modified</th>
+                <th th:if="${b.modified != null}" scope="col">Modified</th>
               </tr>
               </thead>
               <tbody>
-              <tr th:each="brand, i : ${brandList}">
-                <td th:text="${brandList.name}"></td>
-                <td th:text="${brandList.created}"></td>
-                <td th:if="${brandList.modified != null}" th:text="${brandList.modified}"></td>
-                <td th:unless="${brandList.modified != null}" style="visibility: hidden;"></td>
+              <tr th:each="brand : ${brandList}">
+                <td th:text="${brand.name}"></td>
+                <td th:text="${brand.created}"></td>
+                <td th:if="${brand.modified != null}" th:text="${brand.modified}"></td>
+                <td th:unless="${brand.modified != null}" style="visibility: hidden;"></td>
               </tr>
               </tbody>
             </table>
           </div>
-
         </div>
       </main>
     </div>

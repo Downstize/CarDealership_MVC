@@ -1,6 +1,7 @@
 package ru.rutmiit.dto;
 
 
+import jakarta.annotation.Generated;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import ru.rutmiit.models.Enum.EngineEnum;
@@ -24,7 +25,7 @@ public class AddOfferDto {
 //    private LocalDate created;
     private String seller;
 
-    @NotEmpty(message = "Name of model cannot be null or empty!")
+
     public String getId() {
         return id;
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head"/>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
@@ -7,21 +7,49 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
-                <h2 class="text-center text-dark mt-5">All Offers</h2>
-                <div th:each="o : ${offerInfos}" class="d-flex flex-column bg-text mb-3">
-                    <h2 th:text="'Model: ' + ${o.model}"></h2>
-                    <h2 th:text="'User: ' + ${o.users}"></h2>
-                    <h2 th:text="'Price: ' + ${o.price}"></h2>
-                    <h2 th:text="'Year: ' + ${o.year}"></h2>
-                    <h2 th:text="'Seller: ' + ${o.seller}"></h2>
-                    <h4><a class="btn-block" th:href="@{/offers/offer-details/{offer-name}(offer-name=${o.id})}">Detail
-                        info</a></h4>
+            <div class="col-md-8 mt-5">
+                <h2 class="text-center text-dark mb-5">All Offers</h2>
+                <form id="modelForm" th:action="@{/offers/offer-by-model}" method="get">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="modelSelect">Select Model:</label>
+                        <select class="form-select" id="modelSelect" name="model" onchange="submitForm()">
+                            <option value="" selected>Select a Model</option>
+                            <th:block th:each="model : ${availableModels}">
+                                <option th:text="${model.name}" th:value="${model.name}"></option>
+                            </th:block>
+                            <option value="all">Show All Models</option>
+                        </select>
+                    </div>
+                </form>
+
+                <div class="text-right mb-3">
+                    <a th:href="@{/offers/offer/sortByPrice}" class="btn btn-secondary">Sort by Price</a>
+                    <a th:href="@{/offers/offer/sortByYear}" class="btn btn-secondary">Sort by Year</a>
+                </div>
+
+                <div th:each="o : ${offerInfos}" class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="'Model: ' + ${o.model}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" sec:authorize="hasAnyRole('ADMIN')" th:text="'User: ' + ${o.users}"></h6>
+                        <p class="card-text" th:text="'Price: ' + ${o.price}"></p>
+                        <p class="card-text" th:text="'Year: ' + ${o.year}"></p>
+                        <p class="card-text" th:text="'Seller: ' + ${o.seller}"></p>
+                        <a th:href="@{/offers/offer-details/{offer-name}(offer-name=${o.id})}" class="btn btn-primary">Detail info</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
 <footer th:replace="fragments/footer"/>
+<script th:inline="javascript">
+    function submitForm() {
+        var modelSelect = document.getElementById("modelSelect");
+        if (modelSelect.value === "all") {
+            modelSelect.value = "";
+        }
+        document.getElementById("modelForm").submit();
+    }
+</script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head"/>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
@@ -7,12 +7,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-2"></div>
-      <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
-        <h2 class="text-center text-dark mt-5">All Brands</h2>
-        <div th:each="b : ${brandInfos}" class="d-flex flex-column bg-text mb-3">
-          <h2 th:text="'Brand: ' + ${b.name}"></h2>
-          <h4><a class="btn-block" th:href="@{/brands/brand-details/{brand-name}(brand-name=${b.name})}">Detail
-            info</a></h4>
+      <div class="jumbotron col-md-8 mt-5">
+        <h2 class="text-center text-dark mb-4">All Brands</h2>
+        <div class="row">
+          <div th:each="b : ${brandInfos}" class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body text-center">
+                <h2 th:text="${b.name}" class="card-title"></h2>
+                <a class="btn btn-block btn-primary" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/brands/brand-details/{brand-name}(brand-name=${b.name})}">Detail info</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

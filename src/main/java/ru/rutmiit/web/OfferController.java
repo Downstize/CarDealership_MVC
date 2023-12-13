@@ -8,10 +8,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.rutmiit.dto.AddOfferDto;
+import ru.rutmiit.dto.ShowModelInfoDto;
+import ru.rutmiit.dto.ShowOfferInfoDto;
+import ru.rutmiit.services.BrandService;
 import ru.rutmiit.services.ModelService;
 import ru.rutmiit.services.OfferService;
 import ru.rutmiit.services.UserService;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -25,10 +31,13 @@ public class OfferController {
     private final ModelService modelService;
     @Autowired
     private final UserService userService;
-    public OfferController(OfferService offerService, ModelService modelService, UserService userService) {
+    @Autowired
+    private final BrandService brandService;
+    public OfferController(OfferService offerService, ModelService modelService, UserService userService, BrandService brandService) {
         this.offerService = offerService;
         this.modelService = modelService;
         this.userService = userService;
+        this.brandService = brandService;
     }
 
     @GetMapping("/add")
@@ -55,6 +64,8 @@ public class OfferController {
 
     @GetMapping("/offer/all")
     public String showAllOffers(Model model) {
+
+        model.addAttribute("availableModels", modelService.getAllModels());
         model.addAttribute("offerInfos", offerService.getAll());
 
         return "offer-all";
@@ -66,6 +77,44 @@ public class OfferController {
 
         return "offer-details";
     }
+
+    @GetMapping("/offer/sortByPrice")
+    public String sortByPrice(Model model) {
+        List<ShowOfferInfoDto> offerInfos = offerService.getAll();
+        offerInfos.sort(Comparator.comparingDouble(ShowOfferInfoDto::getPrice));
+        model.addAttribute("offerInfos", offerInfos);
+        return "offer-all";
+    }
+
+    // New controller method to handle sorting by year
+    @GetMapping("/offer/sortByYear")
+    public String sortByYear(Model model) {
+        List<ShowOfferInfoDto> offerInfos = offerService.getAll();
+        offerInfos.sort(Comparator.comparingInt(ShowOfferInfoDto::getYear));
+        model.addAttribute("offerInfos", offerInfos);
+        return "offer-all";
+    }
+
+    @GetMapping("/offer-by-model")
+    public String showOffersByModel(@RequestParam(name = "model", required = false) String modelName, Model model) {
+        if ("all".equals(modelName)) {
+            model.addAttribute("offerInfos", offerService.getAll());
+        } else if (modelName != null && !modelName.isEmpty()) {
+            List<ShowOfferInfoDto> offersByModel = offerService.getOffersByModel(modelName);
+            model.addAttribute("offerInfos", offersByModel);
+        } else {
+            model.addAttribute("offerInfos", offerService.getAll());
+        }
+
+        // Add availableModels to the model for repopulating the dropdown
+        model.addAttribute("availableModels", modelService.getAllModels());
+
+        return "offer-all";
+    }
+
+
+
+
 
     @GetMapping("/offer-delete/{offer-id}")
     public String deleteOffer(@PathVariable("offer-id") String id) {

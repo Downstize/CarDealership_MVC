@@ -71,6 +71,14 @@ public class OfferService {
         return modelMapper.map(offerRepository.findById(id).orElse(null), ShowDetailedOfferInfoDto.class);
     }
 
+    @Cacheable("offersByModel")
+    public List<ShowOfferInfoDto> getOffersByModel(String modelName) {
+        return offerRepository.findByModelName(modelName)
+                .stream()
+                .map(offer -> modelMapper.map(offer, ShowOfferInfoDto.class))
+                .collect(Collectors.toList());
+    }
+
     @CacheEvict(cacheNames = "offers", allEntries = true)
     public void removeOffer(String id) {
         offerRepository.deleteById(id);

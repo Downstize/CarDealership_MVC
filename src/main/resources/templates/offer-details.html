@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/head"/>
 <body class="d-flex flex-column h-100">
 <div th:replace="fragments/navbar">Navbar</div>
 <main class="flex-shrink-0">
     <div class="container">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="jumbotron text-center rounded col-md-8 align-self-center pt-5">
-                <h2 class="text-center text-dark mt-5">Offer Details</h2>
-                    <h2 th:text="'Model: ' + ${offerDetails.model}"></h2>
-                    <h2 th:text="'User: ' + ${offerDetails.users}"></h2>
-                    <h2 th:text="'Description: ' + ${offerDetails.description}"></h2>
-                    <h2 th:text="'Engine Type: ' + ${offerDetails.engineEnum}"></h2>
-                    <h2 th:text="'Image URL: ' + ${offerDetails.imageUrl}"></h2>
-                    <h2 th:text="'Mileage: ' + ${offerDetails.mileage}"></h2>
-                    <h2 th:text="'Price: ' + ${offerDetails.price}"></h2>
-                    <h2 th:text="'Transmission type: ' + ${offerDetails.transmissionEnum}"></h2>
-                    <h2 th:text="'Year: ' + ${offerDetails.year}"></h2>
-                    <h2 th:text="'Seller: ' + ${offerDetails.seller}"></h2>
-                    <h2 th:text="'Created: ' + ${offerDetails.created}"></h2>
-                <div th:if="${offerDetails.modified != null}">
-                    <h4 th:text="'Modified: ' + ${offerDetails.modified}"></h4>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center text-dark mb-4">Offer Details</h2>
+                        <img th:src="${offerDetails.imageUrl}" class="img-fluid rounded mb-4" alt="Offer Image">
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="'Model: ' + ${offerDetails.model}"></h6>
+                        <p class="card-text" sec:authorize="hasAnyRole('ADMIN')" th:text="'User: ' + ${offerDetails.users}"></p>
+                        <p class="card-text" th:text="'Description: ' + ${offerDetails.description}"></p>
+                        <p class="card-text" th:text="'Engine Type: ' + ${offerDetails.engineEnum}"></p>
+                        <p class="card-text" th:text="'Mileage: ' + ${offerDetails.mileage}"></p>
+                        <p class="card-text" th:text="'Price: ' + ${offerDetails.price}"></p>
+                        <p class="card-text" th:text="'Transmission type: ' + ${offerDetails.transmissionEnum}"></p>
+                        <p class="card-text" th:text="'Year: ' + ${offerDetails.year}"></p>
+                        <p class="card-text" th:text="'Seller: ' + ${offerDetails.seller}"></p>
+                        <p class="card-text" th:text="'Created: ' + ${offerDetails.created}"></p>
+                        <div th:if="${offerDetails.modified != null}">
+                            <p class="card-text" th:text="'Modified: ' + ${offerDetails.modified}"></p>
+                        </div>
+                        <a class="btn btn-danger" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/offers/offer-delete/{offer-id}(offer-id=${offerDetails.id})}">Delete Offer</a>
+                        <a class="btn btn-warning" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/offers/offer-edit/{offer-id}(offer-id=${offerDetails.id})}">Edit Offer</a>
+                    </div>
                 </div>
-                    <h4><a class="btn btn-danger align-bottom"
-                           th:href="@{/offers/offer-delete/{offer-id}(offer-id=${offerDetails.id})}">Delete
-                        Offer</a></h4>
             </div>
-            <div style="padding-top: 20px"></div>
-            <div class="align-bottom">
-                <a class="btn btn-warning align-bottom" th:href="@{/offers/offer-edit/{offer-id}(offer-id=${offerDetails.id})}">Edit Model</a>
-            </div>
-        </div>
         </div>
     </div>
 </main>
